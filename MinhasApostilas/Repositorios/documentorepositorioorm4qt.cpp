@@ -2,18 +2,20 @@
 
 namespace Repositorios {
 
-DocumentoRepositorioOrm4Qt::DocumentoRepositorioOrm4Qt(const Orm4Qt::Repository &repository) :
+DocumentoRepositorioOrm4Qt::DocumentoRepositorioOrm4Qt(Orm4Qt::Repository *repository) :
     m_repository(repository)
 {}
 
 DocumentoRepositorioOrm4Qt::~DocumentoRepositorioOrm4Qt()
-{}
+{
+    delete m_repository;
+}
 
 bool DocumentoRepositorioOrm4Qt::createObject(Entidades::Documento &object)
 {
     //Assegura que o objeto será criado novamente no banco e não atualizado
     object.reflection()->replaceTag("scope", Orm4Qt::Local);
-    if(m_repository.saveObject<Entidades::Documento>(object))
+    if(m_repository->saveObject<Entidades::Documento>(object))
     {
         return true;
     }
@@ -28,7 +30,7 @@ bool DocumentoRepositorioOrm4Qt::updateObject(Entidades::Documento &object)
 {
     //Assegura que o objeto será atualizado e não criado novamente no banco de dados
     object.reflection()->replaceTag("scope", Orm4Qt::Remote);
-    if(m_repository.saveObject<Entidades::Documento>(object))
+    if(m_repository->saveObject<Entidades::Documento>(object))
     {
         return true;
     }
@@ -43,7 +45,7 @@ bool DocumentoRepositorioOrm4Qt::deleteObject(Entidades::Documento &object)
 {
     //Assegura que o objeto existe no banco de dados
     object.reflection()->replaceTag("scope", Orm4Qt::Remote);
-    if(m_repository.deleteObject<Entidades::Documento>(object))
+    if(m_repository->deleteObject<Entidades::Documento>(object))
     {
         return true;
     }
@@ -63,7 +65,7 @@ bool DocumentoRepositorioOrm4Qt::selectObjects(QList<Entidades::Documento> &list
     //Fim construindo sentenças where e orderby
 
     //Efetuando a consulta
-    if(m_repository.select<Entidades::Documento>(list,
+    if(m_repository->select<Entidades::Documento>(list,
                                                  where.joined() != nullptr ? *where.joined() : where,
                                                  QStringList({"codigo", "nome", "descricao", "ultimaAlteracao", "versao"}),
                                                  orderby,
@@ -89,7 +91,7 @@ bool DocumentoRepositorioOrm4Qt::countObjects(int &count, QMap<QString, QVariant
     //Fim construindo sentenças where e orderby
 
     //Efetuando a consulta
-    if(m_repository.count<Entidades::Documento>(count,where.joined() != nullptr ? *where.joined() : where))
+    if(m_repository->count<Entidades::Documento>(count,where.joined() != nullptr ? *where.joined() : where))
     {
         return true;
     }
@@ -103,7 +105,7 @@ bool DocumentoRepositorioOrm4Qt::countObjects(int &count, QMap<QString, QVariant
 bool DocumentoRepositorioOrm4Qt::getObject(const QVariant &id, Entidades::Documento &object)
 {
     QList<Entidades::Documento> list;
-    if(m_repository.select<Entidades::Documento>(list, Orm4Qt::Where("codigo", Orm4Qt::Equals, {id})))
+    if(m_repository->select<Entidades::Documento>(list, Orm4Qt::Where("codigo", Orm4Qt::Equals, {id})))
     {
         if(list.empty())
         {
@@ -129,8 +131,8 @@ void DocumentoRepositorioOrm4Qt::ajustarMensagemErro(const QString &prefixo)
                          "Mensagem do ORM: %2 \n"
                          "Mensagem do banco de dados: %3")
                          .arg(prefixo)
-                         .arg(m_repository.lastError()->description())
-                         .arg(m_repository.lastError()->sqlError().text()));
+                         .arg(m_repository->lastError()->description())
+                         .arg(m_repository->lastError()->sqlError().text()));
 }
 
 void DocumentoRepositorioOrm4Qt::montarWhereOrderBy(QMap<QString, QVariant> filters, Orm4Qt::Where &where, Orm4Qt::OrderByList &orderby)

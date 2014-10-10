@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql concurrent
 CONFIG += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -19,7 +19,11 @@ SOURCES += main.cpp\
     Utils/inotifypropertychanged.cpp \
     Utils/ipropertygetset.cpp \
     Entidades/documentomodel.cpp \
-    Repositorios/documentorepositorioorm4qt.cpp
+    Repositorios/documentorepositorioorm4qt.cpp \
+    Utils/number.cpp \
+    Formularios/editardocumento.cpp \
+    Utils/lineeditcheckcase.cpp \
+    Utils/texteditwatcher.cpp
 
 HEADERS  += janelaprincipal.h \
     Entidades/documento.h \
@@ -27,9 +31,14 @@ HEADERS  += janelaprincipal.h \
     Utils/ipropertygetset.h \
     Entidades/documentomodel.h \
     Repositorios/irepository.h \
-    Repositorios/documentorepositorioorm4qt.h
+    Repositorios/documentorepositorioorm4qt.h \
+    Utils/number.h \
+    Formularios/editardocumento.h \
+    Utils/lineeditcheckcase.h \
+    Utils/texteditwatcher.h
 
-FORMS    += janelaprincipal.ui
+FORMS    += janelaprincipal.ui \
+    Formularios/editardocumento.ui
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Orm4Qt/release/ -lOrm4Qt
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Orm4Qt/debug/ -lOrm4Qt
@@ -46,3 +55,6 @@ else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Orm4Qt/libOrm4Qt.a
 
 #Escolher qual orm usar
 DEFINES += ORM_ORM4QT
+
+RESOURCES += \
+    Recursos.qrc

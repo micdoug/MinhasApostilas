@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditarDocumento</class>
+ <widget class="QDialog" name="EditarDocumento">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>476</width>
+    <height>384</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Detalhes do Documento</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QLabel" name="labelCabecalho">
+     <property name="text">
+      <string>Modifique as informações relacionadas ao documento como achar necessário. Em seguida confirme sua alteração.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelCodigo">
+       <property name="text">
+        <string>Código</string>
+       </property>
+       <property name="buddy">
+        <cstring>editCodigo</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="Utils::LineEditCheckCase" name="editCodigo">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="labelVersao">
+       <property name="text">
+        <string>Versão:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="labelNome">
+       <property name="text">
+        <string>Nome:</string>
+       </property>
+       <property name="buddy">
+        <cstring>editNome</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="Utils::LineEditCheckCase" name="editNome"/>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLabel" name="labelUltimaAlteracao">
+       <property name="text">
+        <string>Última alteração:</string>
+       </property>
+       <property name="buddy">
+        <cstring>editUltimaAlteracao</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QDateTimeEdit" name="editUltimaAlteracao">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QSpinBox" name="editVersao"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="labelArquivo">
+       <property name="text">
+        <string>Arquivo:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="botaoUpload">
+       <property name="toolTip">
+        <string>Escolher o arquivo para fazer o upload.</string>
+       </property>
+       <property name="text">
+        <string>Upload</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../Recursos.qrc">
+         <normaloff>:/Recursos/icones/go-up.png</normaloff>:/Recursos/icones/go-up.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="botaoDownload">
+       <property name="toolTip">
+        <string>Fazer o download do arquivo atual</string>
+       </property>
+       <property name="text">
+        <string>Download</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../Recursos.qrc">
+         <normaloff>:/Recursos/icones/go-down.png</normaloff>:/Recursos/icones/go-down.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="labelDescricao">
+       <property name="text">
+        <string>Descrição:</string>
+       </property>
+       <property name="buddy">
+        <cstring>editDescricao</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Utils::TextEditWatcher" name="editDescricao"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Save</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Utils::LineEditCheckCase</class>
+   <extends>QLineEdit</extends>
+   <header>Utils/lineeditcheckcase.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Utils::TextEditWatcher</class>
+   <extends>QPlainTextEdit</extends>
+   <header>Utils/texteditwatcher.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>editCodigo</tabstop>
+  <tabstop>editVersao</tabstop>
+  <tabstop>editNome</tabstop>
+  <tabstop>editUltimaAlteracao</tabstop>
+  <tabstop>botaoUpload</tabstop>
+  <tabstop>botaoDownload</tabstop>
+  <tabstop>editDescricao</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../Recursos.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>EditarDocumento</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>353</x>
+     <y>361</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>471</x>
+     <y>325</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>EditarDocumento</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>106</x>
+     <y>364</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

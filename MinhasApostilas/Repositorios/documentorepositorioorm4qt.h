@@ -12,7 +12,7 @@ namespace Repositorios {
 class DocumentoRepositorioOrm4Qt : public IRepository<Entidades::Documento>
 {
 public:
-    DocumentoRepositorioOrm4Qt(const Orm4Qt::Repository &repository);
+    DocumentoRepositorioOrm4Qt(Orm4Qt::Repository *repository);
     virtual ~DocumentoRepositorioOrm4Qt();
 
     //IRepository<Entidades::Documento> interface
@@ -26,7 +26,7 @@ public:
 
 private:
     //Repositório do orm orm4qt usado para executar operações no banco de dados
-    Orm4Qt::Repository m_repository;
+    Orm4Qt::Repository *m_repository;
 
     //Método utilizado para setar uma mensagem de erro padrão
     void ajustarMensagemErro(const QString &prefixo);

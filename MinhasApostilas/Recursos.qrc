@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Recursos/icones/arrow-left.png</file>
+        <file>Recursos/icones/arrow-left-double.png</file>
+        <file>Recursos/icones/arrow-right.png</file>
+        <file>Recursos/icones/arrow-right-double.png</file>
+        <file>Recursos/icones/document-save.png</file>
+        <file>Recursos/icones/edit-delete.png</file>
+        <file>Recursos/icones/edit-rename.png</file>
+        <file>Recursos/icones/list-add.png</file>
+        <file>Recursos/icones/searching.gif</file>
+        <file>Recursos/icones/view-filter.png</file>
+        <file>Recursos/icones/view-refresh.png</file>
+        <file>Recursos/icones/view-table-of-contents-rtl.png</file>
+        <file>Recursos/icones/go-jump.png</file>
+        <file>Recursos/icones/run-build-clean.png</file>
+        <file>Recursos/icones/help-about.png</file>
+        <file>Recursos/icones/icon_Qt_60x60px.png</file>
+        <file>Recursos/icones/download.png</file>
+        <file>Recursos/icones/go-down.png</file>
+        <file>Recursos/icones/go-up.png</file>
+    </qresource>
+</RCC>

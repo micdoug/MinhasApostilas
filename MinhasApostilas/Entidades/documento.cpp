@@ -2,7 +2,10 @@
 
 namespace Entidades {
 
-Documento::Documento()
+Documento::Documento() :
+    m_codigo(0L),
+    m_versao(1.0D),
+    m_ultimaAlteracao(QDateTime::currentDateTime())
 {
     m_propriedades << "codigo"
                    << "nome"
@@ -149,6 +152,7 @@ QVariant Documento::getPropertyValue(const QString &propertyName)
                 return qVariantFromValue<QByteArray>(this->arquivo());
         }
     }
+    return QVariant();
 }
 
 void Documento::emitAllPropertiesChanged()
