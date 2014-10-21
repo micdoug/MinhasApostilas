@@ -27,22 +27,26 @@ public slots:
     void atualizar();
     void adicionarDocumento();
     void editarDocumento();
+    void excluirDocumento();
 
 private slots:
     void aposAtualizar(bool sucesso);
     void aposDocumentoAdicionado(bool sucesso);
     void aposDocumentoEditado(bool sucesso);
+    void aposDocumentoExcluido(bool sucesso);
     void ajustarActions();
     void ajustarLabelPaginas();
     void irParaPaginaAnterior();
     void irParaProximaPagina();
     void irParaPrimeiraPagina();
     void irParaUltimaPagina();
+    void ajustarOrdernacao(int indice, Qt::SortOrder ordem);
 
 signals:
     void atualizado(bool sucesso);
     void documentoAdicionado(bool sucesso);
     void documentoEditado(bool sucesso);
+    void documentoExcluido(bool sucesso);
 
 private:
     //Atributos internos
@@ -53,8 +57,9 @@ private:
     QList<Entidades::Documento> m_documentos;
     QProgressBar *m_barraProgresso;
     qint32 m_qtdPaginas;
-    qint32 m_itensPorPagina = 5;
+    qint32 m_itensPorPagina = 10;
     qint32 m_paginaAtual = 1;
+    QStringList m_nomesColunasOrdenacao;
 
     //Métodos privados
     void setOcupado(bool ocupado);

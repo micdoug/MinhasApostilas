@@ -35,8 +35,10 @@ JanelaPrincipal::JanelaPrincipal(Repositorios::IRepository<Entidades::Documento>
     connect(ui->botaoUltimaPagina, &QToolButton::clicked, this, &JanelaPrincipal::irParaUltimaPagina);
     connect(ui->tableView->selectionModel(), &QItemSelectionModel::currentChanged, this, &JanelaPrincipal::ajustarActions);
     connect(ui->tableView, &QTableView::doubleClicked, ui->actionEditarDocumento, &QAction::trigger);
+    connect(ui->tableView->horizontalHeader(), &QHeaderView::sortIndicatorChanged, this, &JanelaPrincipal::ajustarOrdernacao);
     connect(ui->actionAdicionarDocumento, &QAction::triggered, this, &JanelaPrincipal::adicionarDocumento);
     connect(ui->actionEditarDocumento, &QAction::triggered, this, &JanelaPrincipal::editarDocumento);
+    connect(ui->actionExcluirDocumento, &QAction::triggered, this, &JanelaPrincipal::excluirDocumento);
     connect(ui->actionSobreQt, &QAction::triggered, qApp, &QApplication::aboutQt);
     //Fim conectando ações dos componentes da interface
 
@@ -45,7 +47,16 @@ JanelaPrincipal::JanelaPrincipal(Repositorios::IRepository<Entidades::Documento>
     connect(this, &JanelaPrincipal::atualizado, this, &JanelaPrincipal::ajustarActions);
     connect(this, &JanelaPrincipal::documentoAdicionado, this, &JanelaPrincipal::aposDocumentoAdicionado);
     connect(this, &JanelaPrincipal::documentoEditado, this, &JanelaPrincipal::aposDocumentoEditado);
+    connect(this, &JanelaPrincipal::documentoExcluido, this, &JanelaPrincipal::aposDocumentoExcluido);
     //Fim conectando sinais das tarefas assíncronas
+
+    //Preenchendo lista de nomes de colunas
+    m_nomesColunasOrdenacao << "codigoOrderBy"
+                   << "nomeOrderBy"
+                   << "descricaoOrderBy"
+                   << "ultimaAlteracaoOrderBy"
+                   << "versaoOrderBy";
+    //Fim preenchendo lista de nomes de colunas
 }
 
 JanelaPrincipal::~JanelaPrincipal()
@@ -110,6 +121,7 @@ void JanelaPrincipal::aposAtualizar(bool sucesso)
 
 void JanelaPrincipal::aposDocumentoAdicionado(bool sucesso)
 {
+    setOcupado(false);
     if(sucesso)
     {
         atualizar();
@@ -122,6 +134,7 @@ void JanelaPrincipal::aposDocumentoAdicionado(bool sucesso)
 
 void JanelaPrincipal::aposDocumentoEditado(bool sucesso)
 {
+    setOcupado(false);
     if(sucesso)
     {
         atualizar();
@@ -129,6 +142,19 @@ void JanelaPrincipal::aposDocumentoEditado(bool sucesso)
     else
     {
         QMessageBox::critical(this, "Erro ao editar documento", m_repositorio->lastError());
+    }
+}
+
+void JanelaPrincipal::aposDocumentoExcluido(bool sucesso)
+{
+    setOcupado(false);
+    if(sucesso)
+    {
+        atualizar();
+    }
+    else
+    {
+        QMessageBox::critical(this, "Erro ao excluir veículo", m_repositorio->lastError());
     }
 }
 
@@ -181,6 +207,10 @@ void JanelaPrincipal::ajustarLabelPaginas()
 
 void JanelaPrincipal::adicionarDocumento()
 {
+    //Verificando se não existem operações pendentes
+    if(aguardarOperacoesPendentes())
+        return;
+
     Formularios::EditarDocumento form(Entidades::Documento(), this);
     if(form.exec() == QDialog::Accepted)
     {
@@ -195,11 +225,16 @@ void JanelaPrincipal::adicionarDocumento()
             return m_repositorio->createObject(doctemp);
         });
         watcher->setFuture(future);
+        setOcupado(true);
     }
 }
 
 void JanelaPrincipal::editarDocumento()
 {
+    //Verificando se não existem operações pendentes
+    if(aguardarOperacoesPendentes())
+        return;
+
     //Capturando o índice atual e validando
     QModelIndex index = ui->tableView->selectionModel()->currentIndex();
     if(!index.isValid())
@@ -254,6 +289,71 @@ void JanelaPrincipal::editarDocumento()
     });
     watcher->setFuture(future);
     //Fim criando tarefa assíncrona
+    setOcupado(true);
+}
+
+void JanelaPrincipal::excluirDocumento()
+{
+    //Verificando se não existem operações pendentes
+    if(aguardarOperacoesPendentes())
+        return;
+
+    //Capturando o índice atual e validando
+    QModelIndex index = ui->tableView->selectionModel()->currentIndex();
+    if(!index.isValid())
+    {
+        QMessageBox::warning(this, "Operação ilegal", "Você deve selecionar um item na lista antes de excluir.");
+        return;
+    }
+    //Fim capturando o índice atual e validando
+
+    //Capturando o registro a ser editado
+    qlonglong codigo = m_model.documentos()[index.row()].codigo();
+    QFutureWatcher<bool> *watcher = new QFutureWatcher<bool>(this);
+    QEventLoop loop(this);
+    connect(watcher, &QFutureWatcher<bool>::finished, &loop, &QEventLoop::quit);
+    Entidades::Documento *documento = new Entidades::Documento();
+    QFuture<bool> future = QtConcurrent::run([documento, codigo, this]{
+        return m_repositorio->getObject(codigo, *documento);
+    });
+    watcher->setFuture(future);
+    setOcupado(true);
+    loop.exec();
+    setOcupado(false);
+    if(!watcher->result())
+    {
+        QMessageBox::critical(this, "Erro ao pesquisar registro", m_repositorio->lastError());
+        delete documento;
+        delete watcher;
+        return;
+    }
+    delete watcher;
+    Entidades::Documento doc = Entidades::Documento(*documento);
+    delete documento;
+    //Fim capturando o registro a ser editado
+
+    //Exibindo mensagem de alerta de exclusão
+    setOcupado(true);
+    if(QMessageBox::question(this, "Confirmar exclusão de documento", QString("Você confirma a exclusão do documento \"%1\"?").arg(doc.nome()), QMessageBox::Yes | QMessageBox::No)
+            == QMessageBox::Yes)
+    {
+        //Criando tarefa assíncrona
+        watcher = new QFutureWatcher<bool>(this);
+        connect(watcher, &QFutureWatcher<bool>::finished, this, [this, watcher]{
+            emit documentoExcluido(watcher->result());
+            watcher->deleteLater();
+        });
+        future = QtConcurrent::run([this, doc]{
+            auto temp = doc;
+            return m_repositorio->deleteObject(temp);
+        });
+        watcher->setFuture(future);
+        //Fim criando tarefa assíncrona
+    }
+    else
+    {
+        setOcupado(false);
+    }
 }
 
 void JanelaPrincipal::irParaPaginaAnterior()
@@ -277,6 +377,21 @@ void JanelaPrincipal::irParaPrimeiraPagina()
 void JanelaPrincipal::irParaUltimaPagina()
 {
     m_paginaAtual = m_qtdPaginas;
+    atualizar();
+}
+
+void JanelaPrincipal::ajustarOrdernacao(int indice, Qt::SortOrder ordem)
+{
+    //Limpa os filtros de ordenação
+    for(QString str : m_nomesColunasOrdenacao)
+    {
+        m_filtros.remove(str);
+    }
+
+    //Adicionando novo filtro de ordenação
+    m_filtros.insert(m_nomesColunasOrdenacao[indice], ordem == Qt::AscendingOrder ? QString("asc") : QString("desc"));
+
+    //Atualizando grid
     atualizar();
 }
 
