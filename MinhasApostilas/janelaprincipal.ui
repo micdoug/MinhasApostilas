@@ -162,6 +162,7 @@
     <addaction name="actionAtualizar"/>
     <addaction name="actionFiltrar"/>
     <addaction name="actionIrParaPagina"/>
+    <addaction name="actionItensPorPagina"/>
     <addaction name="actionLimparFiltros"/>
    </widget>
    <widget class="QMenu" name="menuSobre">
@@ -337,6 +338,17 @@
    </property>
    <property name="statusTip">
     <string>Informações sobre este programa.</string>
+   </property>
+  </action>
+  <action name="actionItensPorPagina">
+   <property name="text">
+    <string>Itens por página</string>
+   </property>
+   <property name="toolTip">
+    <string>Defina a quantidade máxima de itens mostrados por página.</string>
+   </property>
+   <property name="statusTip">
+    <string>Define a quantidade máxima de itens exibidos por página.</string>
    </property>
   </action>
  </widget>

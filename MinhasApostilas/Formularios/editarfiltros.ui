@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditarFiltros</class>
+ <widget class="QDialog" name="EditarFiltros">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>551</width>
+    <height>444</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Filtros de pesquisa</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Preencha os campos para o qual deseja utilizar filtros.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Habilite o checkbox na lateral dos campos de filtragem para entrar com os dados requeridos.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Código</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QSpinBox" name="codigoIg">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="prefix">
+           <string>=  </string>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>999999</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QCheckBox" name="codigoIgCheck">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QSpinBox" name="codigoMa">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="prefix">
+           <string>&gt;=  </string>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>999999</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QCheckBox" name="codigoMaCheck">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QSpinBox" name="codigoMe">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="prefix">
+           <string>&lt;=  </string>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>999999</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QCheckBox" name="codigoMeCheck">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="title">
+        <string>Última Alteração</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="1" column="2">
+         <widget class="QCheckBox" name="ultimaAlteracaoMaCheck">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QCheckBox" name="ultimaAlteracaoIgCheck">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QDateTimeEdit" name="ultimaAlteracaoIg">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QDateTimeEdit" name="ultimaAlteracaoMa">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QDateTimeEdit" name="ultimaAlteracaoMe">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QCheckBox" name="ultimaAlteracaoMeCheck">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>=</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>&gt;=</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>&lt;=</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_3">
+       <property name="title">
+        <string>Versão</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QSpinBox" name="versaoIg">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="prefix">
+           <string>=  </string>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>999999</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QCheckBox" name="versaoIgCheck">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QSpinBox" name="versaoMa">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="prefix">
+           <string>&gt;=  </string>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>999999</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QCheckBox" name="versaoMaCheck">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QSpinBox" name="versaoMe">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="prefix">
+           <string>&lt;=  </string>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>999999</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QCheckBox" name="versaoMeCheck">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="title">
+      <string>Nome</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="1">
+       <widget class="Utils::LineEditCheckCase" name="nomeCont">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QCheckBox" name="nomeTermCheck">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="Utils::LineEditCheckCase" name="nomeIni">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="Utils::LineEditCheckCase" name="nomeTerm">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QCheckBox" name="nomeContCheck">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QCheckBox" name="nomeIniCheck">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Contém</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Inicia</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Termina</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_5">
+     <property name="title">
+      <string>Descrição</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="1">
+       <widget class="Utils::LineEditCheckCase" name="descricaoCont">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QCheckBox" name="descricaoTermCheck">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="Utils::LineEditCheckCase" name="descricaoIni">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="Utils::LineEditCheckCase" name="descricaoTerm">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QCheckBox" name="descricaoContCheck">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QCheckBox" name="descricaoIniCheck">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>Contém</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Inicia</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>Termina</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Utils::LineEditCheckCase</class>
+   <extends>QLineEdit</extends>
+   <header>../Utils/lineeditcheckcase.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>codigoIg</tabstop>
+  <tabstop>codigoIgCheck</tabstop>
+  <tabstop>codigoMa</tabstop>
+  <tabstop>codigoMaCheck</tabstop>
+  <tabstop>codigoMe</tabstop>
+  <tabstop>codigoMeCheck</tabstop>
+  <tabstop>ultimaAlteracaoIg</tabstop>
+  <tabstop>ultimaAlteracaoIgCheck</tabstop>
+  <tabstop>ultimaAlteracaoMa</tabstop>
+  <tabstop>ultimaAlteracaoMaCheck</tabstop>
+  <tabstop>ultimaAlteracaoMe</tabstop>
+  <tabstop>ultimaAlteracaoMeCheck</tabstop>
+  <tabstop>versaoIg</tabstop>
+  <tabstop>versaoIgCheck</tabstop>
+  <tabstop>versaoMa</tabstop>
+  <tabstop>versaoMaCheck</tabstop>
+  <tabstop>versaoMe</tabstop>
+  <tabstop>versaoMeCheck</tabstop>
+  <tabstop>nomeCont</tabstop>
+  <tabstop>nomeContCheck</tabstop>
+  <tabstop>nomeIni</tabstop>
+  <tabstop>nomeIniCheck</tabstop>
+  <tabstop>nomeTerm</tabstop>
+  <tabstop>nomeTermCheck</tabstop>
+  <tabstop>descricaoCont</tabstop>
+  <tabstop>descricaoContCheck</tabstop>
+  <tabstop>descricaoIni</tabstop>
+  <tabstop>descricaoIniCheck</tabstop>
+  <tabstop>descricaoTerm</tabstop>
+  <tabstop>descricaoTermCheck</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>EditarFiltros</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>227</x>
+     <y>391</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>EditarFiltros</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>295</x>
+     <y>397</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>codigoIgCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>codigoIg</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>103</x>
+     <y>75</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>70</x>
+     <y>75</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>codigoMaCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>codigoMa</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>101</x>
+     <y>102</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>68</x>
+     <y>103</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>codigoMeCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>codigoMe</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>102</x>
+     <y>127</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>76</x>
+     <y>127</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ultimaAlteracaoIgCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>ultimaAlteracaoIg</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>338</x>
+     <y>73</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>318</x>
+     <y>78</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ultimaAlteracaoMaCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>ultimaAlteracaoMa</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>343</x>
+     <y>101</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>318</x>
+     <y>103</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ultimaAlteracaoMeCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>ultimaAlteracaoMe</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>345</x>
+     <y>127</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>323</x>
+     <y>128</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>versaoIgCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>versaoIg</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>454</x>
+     <y>74</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>437</x>
+     <y>77</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>versaoMaCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>versaoMa</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>454</x>
+     <y>99</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>103</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>versaoMeCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>versaoMe</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>124</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>129</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>nomeContCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>nomeCont</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>515</x>
+     <y>186</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>497</x>
+     <y>186</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>nomeIniCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>nomeIni</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>514</x>
+     <y>215</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>503</x>
+     <y>218</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>nomeTermCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>nomeTerm</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>515</x>
+     <y>239</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>495</x>
+     <y>239</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>descricaoContCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>descricaoCont</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>515</x>
+     <y>298</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>492</x>
+     <y>298</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>descricaoIniCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>descricaoIni</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>511</x>
+     <y>322</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>499</x>
+     <y>325</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>descricaoTermCheck</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>descricaoTerm</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>515</x>
+     <y>353</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>493</x>
+     <y>353</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -10,7 +10,7 @@ LineEditCheckCase::LineEditCheckCase(QWidget *parent) :
 
 void LineEditCheckCase::keyPressEvent(QKeyEvent *event)
 {
-    if(event->key() >= Qt::Key_A && event->key() <= Qt::Key_Z)
+    if(event->text().at(0).isLetter())
     {
         QLineEdit::keyPressEvent(new QKeyEvent(QKeyEvent::KeyPress, event->key(), event->modifiers(), event->text().toUpper()));
     }

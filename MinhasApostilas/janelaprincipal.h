@@ -28,6 +28,10 @@ public slots:
     void adicionarDocumento();
     void editarDocumento();
     void excluirDocumento();
+    void filtrar();
+    void limparFiltros();
+    void irParaPagina();
+    void alterarQtdItensPagina();
 
 private slots:
     void aposAtualizar(bool sucesso);

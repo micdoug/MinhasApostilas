@@ -2,11 +2,14 @@
 #include "ui_janelaprincipal.h"
 #include "Utils/number.h"
 #include "Formularios/editardocumento.h"
+#include "Formularios/editarfiltros.h"
 #include <QtConcurrent>
 #include <QFutureWatcher>
 #include <QFuture>
 #include <QMessageBox>
 #include <QProgressBar>
+#include <QPair>
+#include <QInputDialog>
 
 JanelaPrincipal::JanelaPrincipal(Repositorios::IRepository<Entidades::Documento> *repositorio, QWidget *parent) :
     QMainWindow(parent),
@@ -39,6 +42,10 @@ JanelaPrincipal::JanelaPrincipal(Repositorios::IRepository<Entidades::Documento>
     connect(ui->actionAdicionarDocumento, &QAction::triggered, this, &JanelaPrincipal::adicionarDocumento);
     connect(ui->actionEditarDocumento, &QAction::triggered, this, &JanelaPrincipal::editarDocumento);
     connect(ui->actionExcluirDocumento, &QAction::triggered, this, &JanelaPrincipal::excluirDocumento);
+    connect(ui->actionFiltrar, &QAction::triggered, this, &JanelaPrincipal::filtrar);
+    connect(ui->actionIrParaPagina, &QAction::triggered, this, &JanelaPrincipal::irParaPagina);
+    connect(ui->actionItensPorPagina, &QAction::triggered, this, &JanelaPrincipal::alterarQtdItensPagina);
+    connect(ui->actionLimparFiltros, &QAction::triggered, this, &JanelaPrincipal::limparFiltros);
     connect(ui->actionSobreQt, &QAction::triggered, qApp, &QApplication::aboutQt);
     //Fim conectando ações dos componentes da interface
 
@@ -285,6 +292,7 @@ void JanelaPrincipal::editarDocumento()
     });
     future = QtConcurrent::run([this, doc]{
         auto temp = doc;
+        temp.setUltimaAlteracao(QDateTime::currentDateTime());
         return m_repositorio->updateObject(temp);
     });
     watcher->setFuture(future);
@@ -344,6 +352,11 @@ void JanelaPrincipal::excluirDocumento()
             watcher->deleteLater();
         });
         future = QtConcurrent::run([this, doc]{
+            //Se só existir um elemento na tela e ele for excluído, o número da página atual deve ser decrementado
+            if(m_model.documentos().size() == 1 && m_paginaAtual > 1)
+            {
+                m_paginaAtual--;
+            }
             auto temp = doc;
             return m_repositorio->deleteObject(temp);
         });
@@ -353,6 +366,77 @@ void JanelaPrincipal::excluirDocumento()
     else
     {
         setOcupado(false);
+    }
+}
+
+void JanelaPrincipal::filtrar()
+{
+    //Verificando se há operações pendentes
+    if(aguardarOperacoesPendentes())
+        return;
+
+    //Criando janela de edição de filtros
+    Formularios::EditarFiltros formulario(&m_filtros, this);
+    if (formulario.exec() == QDialog::Accepted)
+    {
+        atualizar();
+    }
+}
+
+void JanelaPrincipal::limparFiltros()
+{
+    //Verificando se há tarefas pendentes
+    if(aguardarOperacoesPendentes())
+        return;
+
+    //Guarda valor de ordenação antes de limpar
+    QPair<QString, QVariant> ordenar;
+    for(QString str : m_nomesColunasOrdenacao)
+    {
+        if(m_filtros.contains(str))
+        {
+            ordenar.first = str;
+            ordenar.second = m_filtros[str];
+            break;
+        }
+    }
+    m_filtros.clear();
+    if(!ordenar.first.isNull())
+    {
+        m_filtros.insert(ordenar.first, ordenar.second);
+    }
+    atualizar();
+}
+
+void JanelaPrincipal::irParaPagina()
+{
+    //Verificando se há operações pendentes
+    if(aguardarOperacoesPendentes())
+        return;
+
+    //Aplica o número da página escolhida
+    bool escolheu;
+    int pagina = QInputDialog::getInt(this, "Ir para a página", "Defina o número da página para a qual deseja ir.", m_paginaAtual, 1, m_qtdPaginas, 1, &escolheu);
+    if(escolheu)
+    {
+        m_paginaAtual = pagina;
+        atualizar();
+    }
+}
+
+void JanelaPrincipal::alterarQtdItensPagina()
+{
+    //Verificando se há operações pendentes
+    if(aguardarOperacoesPendentes())
+        return;
+
+    //Aplica o número da página escolhida
+    bool escolheu;
+    int qtd = QInputDialog::getInt(this, "Quantidade de itens por página", "Defina a quantidade de itens por página.", m_itensPorPagina, 1, 999999, 1, &escolheu);
+    if(escolheu)
+    {
+        m_itensPorPagina = qtd;
+        atualizar();
     }
 }
 

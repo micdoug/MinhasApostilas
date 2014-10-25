@@ -4,8 +4,8 @@ namespace Entidades {
 
 Documento::Documento() :
     m_codigo(0L),
-    m_versao(1.0D),
-    m_ultimaAlteracao(QDateTime::currentDateTime())
+    m_ultimaAlteracao(QDateTime::currentDateTime()),
+    m_versao(1.0)
 {
     m_propriedades << "codigo"
                    << "nome"

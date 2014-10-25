@@ -8,9 +8,13 @@
 #include "../Utils/inotifypropertychanged.h"
 #include "../Utils/ipropertygetset.h"
 
-#ifdef ORM_ORM4QT
+//Anotações Orm4Qt
+#ifdef COMPILANDO
 #include "annotations.h"
 #endif
+
+//Definições de pragmas do ODB Orm
+#include <odb/core.hxx>
 
 namespace Entidades {
 
@@ -54,7 +58,7 @@ class Documento: public Utils::INotifyPropertyChanged, public Utils::IPropertyGe
         virtual void emitAllPropertiesChanged() override;
 
         //Orm4Qt annotations
-    #ifdef ORM_ORM4QT
+    #ifdef COMPILANDO
         ORM4QT_BEGIN
             CLASS(name="Documento", autocolumn="codigo", table="t_documento")
             PROPERTY(m_codigo, name="codigo", column="c_codigo", key=true)
@@ -67,6 +71,25 @@ class Documento: public Utils::INotifyPropertyChanged, public Utils::IPropertyGe
     #endif
 
     };
+
+    //Mapeamento com o ODB Orm
+    #pragma db object(Documento) table("t_documento") pointer(std::unique_ptr)
+    #pragma db member(Documento::m_codigo) id auto column("c_codigo")
+    #pragma db member(Documento::m_nome) not_null unique column("c_nome")
+    #pragma db member(Documento::m_descricao) null column("c_descricao")
+    #pragma db member(Documento::m_ultimaAlteracao) not_null column("c_ultimaAlteracao")
+    #pragma db member(Documento::m_versao) not_null column("c_versao")
+    #pragma db member(Documento::m_arquivo) not_null column("c_arquivo")
+    #pragma db member(Documento::m_propriedades) transient
+
+    #pragma db view object(Documento)
+    struct DocumentoInfo
+    {
+        #pragma db column("count(" + Documento::m_codigo + ")")
+        std::size_t quantidade;
+    };
+
+
 } // namespace Entidades
 
 #endif // ENTIDADES_DOCUMENTO_H

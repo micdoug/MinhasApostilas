@@ -201,12 +201,12 @@
   <customwidget>
    <class>Utils::LineEditCheckCase</class>
    <extends>QLineEdit</extends>
-   <header>Utils/lineeditcheckcase.h</header>
+   <header>../Utils/lineeditcheckcase.h</header>
   </customwidget>
   <customwidget>
    <class>Utils::TextEditWatcher</class>
    <extends>QPlainTextEdit</extends>
-   <header>Utils/texteditwatcher.h</header>
+   <header>../Utils/texteditwatcher.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
