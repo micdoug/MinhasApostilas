@@ -16,6 +16,7 @@ JanelaPrincipal::JanelaPrincipal(Repositorios::IRepository<Entidades::Documento>
     ui(new Ui::JanelaPrincipal),
     m_repositorio(repositorio)
 {
+    setAttribute(Qt::WA_DeleteOnClose);
     ui->setupUi(this);
 
     //Ajustando barra de status

@@ -7,6 +7,10 @@
 #Adicionando módulos do framework Qt que são utilizados no projeto
 QT       += core gui sql concurrent
 
+#Incluindo qxorm
+include(../QxOrm/QxOrm.pri)
+INCLUDEPATH += ../QxOrm/include
+
 #Ativando suporte a especificação C++11
 CONFIG += c++11
 
@@ -32,11 +36,11 @@ SOURCES += main.cpp\
     Utils/lineeditcheckcase.cpp \
     Utils/texteditwatcher.cpp \
     Formularios/editarfiltros.cpp \
-    Repositorios/documentorepositorioodb.cpp
+    Repositorios/documentorepositorioodb.cpp \
+    Repositorios/documentorepositorioqxorm.cpp
 
 #Arquivos de cabeçalho
 HEADERS  += janelaprincipal.h \
-    Entidades/documento.h \
     Utils/inotifypropertychanged.h \
     Utils/ipropertygetset.h \
     Entidades/documentomodel.h \
@@ -47,7 +51,8 @@ HEADERS  += janelaprincipal.h \
     Utils/lineeditcheckcase.h \
     Utils/texteditwatcher.h \
     Formularios/editarfiltros.h \
-    Repositorios/documentorepositorioodb.h
+    Repositorios/documentorepositorioodb.h \
+    Repositorios/documentorepositorioqxorm.h
 
 #Arquivos de design de interface
 FORMS    += janelaprincipal.ui \
@@ -138,3 +143,10 @@ DEFINES += ORM_ODB
 
 DEFINES += COMPILANDO
 DEFINES += ORM4QT_DEBUG_SL
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../QxOrm/lib/ -lQxOrm
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../QxOrm/lib/ -lQxOrm
+else:unix: LIBS += -L$$OUT_PWD/../QxOrm/lib -lQxOrm
+
+INCLUDEPATH += $$PWD/../QxOrm
+DEPENDPATH += $$PWD/../QxOrm

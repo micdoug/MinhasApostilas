@@ -1,5 +1,21 @@
 #include "documento.h"
 
+#ifdef COMPILANDO
+namespace qx
+{
+    template<> void register_class(QxClass<Entidades::Documento> &t)
+    {
+        t.setName("t_documento");
+        t.id(&Entidades::Documento::m_codigo, "c_codigo");
+        t.data(&Entidades::Documento::m_nome, "c_nome");
+        t.data(&Entidades::Documento::m_descricao, "c_descricao");
+        t.data(&Entidades::Documento::m_ultimaAlteracao, "c_ultimaalteracao");
+        t.data(&Entidades::Documento::m_versao, "c_versao");
+        t.data(&Entidades::Documento::m_arquivo, "c_arquivo");
+    }
+}
+#endif
+
 namespace Entidades {
 
 Documento::Documento() :

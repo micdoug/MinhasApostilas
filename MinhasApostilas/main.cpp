@@ -1,27 +1,32 @@
 #include "janelaprincipal.h"
 #include <QApplication>
+#include <QInputDialog>
 
-#ifdef ORM_ORM4QT
 #include "Repositorios/documentorepositorioorm4qt.h"
 #include "postgresqlprovider.h"
-#endif
 
-#ifdef ORM_ODB
 #include "Repositorios/documentorepositorioodb.h"
-#endif
+#include "Repositorios/documentorepositorioqxorm.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-#ifdef ORM_ORM4QT
-    JanelaPrincipal w(new Repositorios::DocumentoRepositorioOrm4Qt(new Orm4Qt::Repository(new Orm4Qt::PostgreSqlProvider("postgres", "postgres", "MinhasApostilas"))));
-#endif
+    JanelaPrincipal *w = nullptr;
 
-#ifdef ORM_ODB
-    JanelaPrincipal w(new Repositorios::DocumentoRepositorioODB("postgres", "postgres", "MinhasApostilas"));
-#endif
 
-    w.show();
-    w.atualizar();
+    bool escolheu = false;
+    QString escolha;
+    while(!escolheu)
+        escolha = QInputDialog::getItem(nullptr, "Biblioteca ORM utilizada", "Escolha qual biblioteca ORM deseja utilizar", QStringList({"ODB", "Orm4Qt", "QxORM"}), 0, false, &escolheu);
+
+    if(escolha == "ODB")
+        w = new JanelaPrincipal(new Repositorios::DocumentoRepositorioODB("postgres", "postgres", "MinhasApostilas"));
+    else if(escolha == "Orm4Qt")
+        w = new JanelaPrincipal(new Repositorios::DocumentoRepositorioOrm4Qt(new Orm4Qt::Repository(new Orm4Qt::PostgreSqlProvider("postgres", "postgres", "MinhasApostilas"))));
+    else
+        w = new JanelaPrincipal(new Repositorios::DocumentoRepositorioQxOrm("postgres", "postgres", "MinhasApostilas"));
+
+    w->show();
+    w->atualizar();
     return a.exec();
 }

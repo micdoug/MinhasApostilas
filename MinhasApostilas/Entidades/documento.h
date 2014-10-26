@@ -11,6 +11,7 @@
 //Anotações Orm4Qt
 #ifdef COMPILANDO
 #include "annotations.h"
+#include <QxOrm.h>
 #endif
 
 //Definições de pragmas do ODB Orm
@@ -20,6 +21,9 @@ namespace Entidades {
 
 class Documento: public Utils::INotifyPropertyChanged, public Utils::IPropertyGetSet
 {
+#ifdef COMPILANDO
+   QX_REGISTER_FRIEND_CLASS(Entidades::Documento)
+#endif
     public:
         Documento();
         virtual ~Documento();
@@ -104,7 +108,11 @@ class Documento: public Utils::INotifyPropertyChanged, public Utils::IPropertyGe
         quint16 versao;
     };
 
-
 } // namespace Entidades
+
+#ifdef COMPILANDO
+QX_REGISTER_PRIMARY_KEY(Entidades::Documento, qlonglong)
+QX_REGISTER_COMPLEX_CLASS_NAME_HPP(Entidades::Documento, qx::trait::no_base_class_defined, 0, Documento)
+#endif
 
 #endif // ENTIDADES_DOCUMENTO_H
