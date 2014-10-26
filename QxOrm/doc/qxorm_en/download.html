@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+  <title>QxOrm : C++ Qt Object Relational Mapping Library (ORM) - QxEntityEditor : C++ Qt Entities Graphic Editor (data model)</title>
+  <meta name="generator" content="Amaya, see http://www.w3.org/Amaya/">
+  <link rel='stylesheet' type='text/css' href='./resource/qxorm_style.css'>
+  <script type="text/javascript" src="./resource/qxorm_script.js"></script>
+</head>
+<body>
+<table border="0" style="width: 80%" align="center">
+  <col><col><col>
+  <tbody>
+    <tr>
+      <td><a href="./home.html"><img alt="QxOrm" src="./resource/logo_qxorm_and_qxee.png"align="left" border="0"></a></td>
+      <td align="right" style="vertical-align:bottom">
+        <img alt="Windows" src="./resource/logo_windows.gif" width="35" height="35">
+        <img alt="Linux" src="./resource/logo_linux.gif" width="35" height="35">
+        <img alt="Macintosh" src="./resource/logo_mac.gif" width="35" height="35">
+      </td>
+      <td width="70"><img alt="C++" src="./resource/logo_cpp.gif" width="50" height="50" align="right"></td>
+    </tr>
+  </tbody>
+</table>
+<hr style="width: 80%" align="center" size="1" color="#100D5A">
+<table border="0" style="width: 80%" align="center">
+  <col><col><col><col><col><col>
+  <tbody>
+    <tr>
+      <td align="center"><a href="./home.html" class="btn_nav">Home</a></td>
+      <td align="center"><a href="./download.html" class="btn_nav">Download</a></td>
+      <td align="center"><a href="./quick_sample.html" class="btn_nav">Quick sample</a></td>
+      <td align="center" onmouseover="showHideElementById('menu_tuto', true);" onmouseout="showHideElementById('menu_tuto', false);">
+         <a href="./tutorial.html" class="btn_nav">Tutorial (4)</a>
+         <table class="table_menu_tuto"><tbody><tr><td>
+            <div id="menu_tuto" class="div_menu_tuto">
+               <a href="./tutorial_3.html" class="btn_sub_menu">install QxOrm</a><br/>
+               <a href="./tutorial.html" class="btn_sub_menu">qxBlog</a><br/>
+               <a href="./tutorial_2.html" class="btn_sub_menu">qxClientServer</a><br/>
+               <a href="./tutorial_4.html" class="btn_sub_menu">QxEntityEditor videos</a>
+            </div>
+         </td></tr></tbody></table>
+      </td>
+      <td align="center"><a href="./faq.html" class="btn_nav">Faq (36)</a></td>
+      <td align="center"><a href="./link.html" class="btn_nav">Forum</a></td>
+    </tr>
+  </tbody>
+</table>
+<hr style="width: 80%" align="center" size="1" color="#100D5A">
+<table border="0" style="width: 80%" align="center">
+  <col><col><col><col><col><col>
+  <tbody><tr>
+  <td align="left" valign="top"><font size="2" class="txt_with_shadow">QxOrm  &gt;&gt;  Download</font></td>
+  <td align="right" valign="top">
+    <table cellspacing="0" cellpadding="1"><col><col><tbody>
+      <tr>
+         <td align="right" valign="top"><font size="2" class="txt_with_shadow">Current version :&nbsp;</font></td>
+         <td align="left" valign="top"><font size="2" class="txt_with_shadow">QxOrm 1.2.9 - <a href="../doxygen/index.html" target="_blank">QxOrm library online documentation</a></font></td>
+      </tr>
+      <tr>
+         <td align="right" valign="top"><font size="2" class="txt_with_shadow"></font></td>
+         <td align="left" valign="top"><font size="2" class="txt_with_shadow">QxEntityEditor 1.1.6</font></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td width="10px"></td>
+  <td width="40px" height="30px"><a href="../qxorm_fr/download.html"><img alt="Version française du site" src="./resource/FR.png" width="40" height="30" border="0"></a></td>
+  <td width="40px" height="30px"><a href="../qxorm_en/download.html"><img alt="Web site english version" src="./resource/GB.png" width="40" height="30" border="0"></a></td>
+  <td width="40px" height="30px"><a href="http://sites.google.com/site/qxormpostgres/" target="_blank"><img alt="" src="./resource/ES.png" width="40" height="30" border="0"></a></td>
+  </tr></tbody>
+</table>
+<table border="1" frame="vsides" rules="cols" style="width: 80%" align="center" cellpadding="6" bgcolor="#F2F2F4">
+  <col>
+  <tbody>
+    <tr>
+      <td align="justify">
+        <table border="0" style="width: 100%" align="center">
+          <col><col>
+          <tbody>
+            <tr>
+              <td><b>QxOrm</b> is a C++ library available under a dual license :
+                  <ul>
+                     <li><a href="./resource/license.gpl3.txt" target="_blank">GNU/GPLv3 license</a> : open-source and free (to develop an open-source project or to evaluate QxOrm library) ;</li>
+                     <li><a href="./download_details.php">Proprietary license</a> to distribute an application based on QxOrm library without any restrictions of <i>GNU/GPLv3</i> license.</li>
+                  </ul>
+                  <table border="0" style="width: 100%" align="center">
+                   <col>
+                   <col>
+                   <tbody>
+                     <tr>
+                       <td valign="middle" width="80" align="center"><a href="./download_details.php"><img alt="Download QxOrm" src="./resource/download.jpg" width="40" height="48" border="0"></a> </td>
+                       <td align="justify">
+                         <a href="./download_details.php">
+                         <b>Download QxOrm 1.2.9 (source + test + documentation)</b></a><br>
+                         This version has been tested with <b>Visual Studio 2008, 2010 and 2012</b> on Windows, <b>GCC 4.4.1</b> on Linux and Mac OS X, <b>MinGW</b> on Windows, and <b>Clang</b> on Mac OS X.
+                       </td>
+                     </tr>
+                   </tbody>
+                  </table>
+                  <br>
+                 <hr style="width: 90%" align="center" size="1" color="#100D5A">
+              </td>
+              <td width="200" align="center" valign="top"><a href="./resource/qt_ambassador_logo.png" target="_blank"><img alt="qt_ambassador" src="./resource/qt_ambassador_logo_150x150.png" width="150" height="150" border="0"></a><br>
+                 <b><font size="2">QxOrm library has been accepted into the <a href="http://qt.digia.com/qtambassador/" target="_blank">Qt Ambassador Program</a></font></b>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p align="justify"><b>QxEntityEditor</b> is a graphic editor for <b>QxOrm</b> library : <b>QxEntityEditor</b> provides a graphic way to manage the data model.<br>
+        <b>QxEntityEditor</b> is multi-platform (available for Windows, Linux and Mac OS X) and generate native code for all environments : desktop (Windows, Linux, Mac OS X), embedded and mobile (Android, iOS, Raspberry Pi, etc.).</p>
+        <p align="justify">
+          <table border="0" style="width: 100%" align="center">
+            <col><col><col><col><col><col><col><col>
+            <tbody>
+              <tr>
+                <td valign="middle" width="80" align="center"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_setup_win32.exe&file_desc=QxEntityEditor_1.1.6_setup_win32" target="_blank"><img alt="QxEntityEditor" src="./resource/logo_windows.gif" width="32" height="32" border="0"></a></td>
+                <td align="justify"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_setup_win32.exe&file_desc=QxEntityEditor_1.1.6_setup_win32" target="_blank"><b>QxEntityEditor 1.1.6 - Windows 32 bits</b></a></td>
+                <td width="40"></td>
+                <td valign="middle" width="80" align="center"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_setup_win64.exe&file_desc=QxEntityEditor_1.1.6_setup_win64" target="_blank"><img alt="QxEntityEditor" src="./resource/logo_windows.gif" width="32" height="32" border="0"></a></td>
+                <td align="justify"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_setup_win64.exe&file_desc=QxEntityEditor_1.1.6_setup_win64" target="_blank"><b>QxEntityEditor 1.1.6 - Windows 64 bits</b></a></td>
+                <td width="40"></td>
+                <td valign="middle" width="80" align="center"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_setup_winxp.exe&file_desc=QxEntityEditor_1.1.6_setup_winxp" target="_blank"><img alt="QxEntityEditor" src="./resource/logo_windows.gif" width="32" height="32" border="0"></a></td>
+                <td align="justify"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_setup_winxp.exe&file_desc=QxEntityEditor_1.1.6_setup_winxp" target="_blank"><b>QxEntityEditor 1.1.6 - Windows XP</b></a></td>
+              </tr>
+              <tr>
+                <td valign="middle" width="80" align="center"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_win_32b.zip&file_desc=QxEntityEditor_1.1.6_win_32b" target="_blank"><img alt="QxEntityEditor" src="./resource/logo_windows.gif" width="32" height="32" border="0"></a></td>
+                <td align="justify"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_win_32b.zip&file_desc=QxEntityEditor_1.1.6_win_32b" target="_blank"><b>QxEntityEditor 1.1.6 - Windows 32 bits (portable)</b></a></td>
+                <td width="40"></td>
+                <td valign="middle" width="80" align="center"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_win_64b.zip&file_desc=QxEntityEditor_1.1.6_win_64b" target="_blank"><img alt="QxEntityEditor" src="./resource/logo_windows.gif" width="32" height="32" border="0"></a></td>
+                <td align="justify"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_win_64b.zip&file_desc=QxEntityEditor_1.1.6_win_64b" target="_blank"><b>QxEntityEditor 1.1.6 - Windows 64 bits (portable)</b></a></td>
+                <td width="40"></td>
+                <td valign="middle" width="80" align="center"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_win_xp.zip&file_desc=QxEntityEditor_1.1.6_win_xp" target="_blank"><img alt="QxEntityEditor" src="./resource/logo_windows.gif" width="32" height="32" border="0"></a></td>
+                <td align="justify"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_win_xp.zip&file_desc=QxEntityEditor_1.1.6_win_xp" target="_blank"><b>QxEntityEditor 1.1.6 - Windows XP (portable)</b></a></td>
+              </tr>
+              <tr>
+                <td valign="middle" width="80" align="center"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_linux_32b.tar.gz&file_desc=QxEntityEditor_1.1.6_linux_32b" target="_blank"><img alt="QxEntityEditor" src="./resource/logo_linux.gif" width="32" height="32" border="0"></a></td>
+                <td align="justify"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_linux_32b.tar.gz&file_desc=QxEntityEditor_1.1.6_linux_32b" target="_blank"><b>QxEntityEditor 1.1.6 - Linux 32 bits</b></a></td>
+                <td width="40"></td>
+                <td valign="middle" width="80" align="center"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_linux_64b.tar.gz&file_desc=QxEntityEditor_1.1.6_linux_64b" target="_blank"><img alt="QxEntityEditor" src="./resource/logo_linux.gif" width="32" height="32" border="0"></a></td>
+                <td align="justify"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_linux_64b.tar.gz&file_desc=QxEntityEditor_1.1.6_linux_64b" target="_blank"><b>QxEntityEditor 1.1.6 - Linux 64 bits</b></a></td>
+              </tr>
+              <tr>
+                <td valign="middle" width="80" align="center"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_macosx.zip&file_desc=QxEntityEditor_1.1.6_macosx" target="_blank"><img alt="QxEntityEditor" src="./resource/logo_mac.gif" width="32" height="32" border="0"></a></td>
+                <td align="justify"><a href="../php/add_download.php5?file_path=QxEntityEditor/1.1.6/QxEntityEditor_1.1.6_macosx.zip&file_desc=QxEntityEditor_1.1.6_macosx" target="_blank"><b>QxEntityEditor 1.1.6 - Mac OS X</b></a></td>
+              </tr>
+            </tbody>
+          </table>
+        </p>
+        <p align="justify"><b>Note : </b>by default, <b>QxEntityEditor</b> application is limited to 5 entities per project.
+        To get a license key and create unlimited entities per project, please contact us using this e-mail : <a href="mailto:contact@qxorm.com">contact@qxorm.com</a>.<br>
+        <br>
+        <a href="./tutorial_4.html">A video presentation of <b>QxEntityEditor</b> application is available</a>.<br>
+        Price of a <b>QxEntityEditor</b> license : <i>300&euro;</i> (per developer, 12 months of free updates).</p>
+        <a href="../qxentityeditor/resource/qxee_sample.png" target="_blank"><img alt="QxEntityEditor" src="../qxentityeditor/resource/qxee_sample_small.png" border="0" class="img_with_shadow"></a>
+        <br><br>
+        <hr style="width: 90%" align="center" size="1" color="#100D5A">
+        <p align="justify">
+        Before you install and compile <b>QxOrm</b>, you need the following libraries : <a href="http://www.boost.org/" target="_blank"><b>boost</b></a> (from version 1.38) and <a href="http://qt.digia.com/" target="_blank"><b>Qt</b></a> (from version 4.5.0) :</p>
+        <table border="0" style="width: 100%" align="center">
+          <col><col>
+          <tbody>
+            <tr>
+              <td valign="middle" width="161" align="center"><a href="http://www.boost.org/" target="_blank"><img alt="boost" src="./resource/logo_boost.jpg" width="161" height="50" border="0"></a></td>
+              <td align="justify"><b>boost</b> : many of boost's founders are on the C++ standard committee and several boost libraries have been accepted for incorporation into C++1x (new standard for the C++ programming language).
+              The boost's libraries are aimed at a wide range of C++ users and application domains.<br>
+              QxOrm uses the following features of boost : <i>smart_pointer, serialization, type_traits, multi_index_container, unordered_container, any, tuple, foreach, function.</i><br>
+              It is recommended to install the latest version of boost available at the following address : <a href="http://www.boost.org/" target="_blank">http://www.boost.org/</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <p></p>
+        <table border="0" style="width: 100%" align="center">
+          <col><col>
+          <tbody>
+            <tr>
+              <td valign="middle" width="161" align="center"><a href="http://qt.digia.com/" target="_blank"><img alt="Qt" src="./resource/logo_qt.jpg" width="42" height="50" border="0"></a></td>
+              <td align="justify"><b>Qt</b> : cross-platform application development framework : ihm (<i>QtGui</i>), network (<i>QtNetwork</i>), xml (<i>QtXml</i>), database (<i>QtSql</i>)...<br>
+              Qt provides excellent support and documentation. Using Qt, you can write simple and powerful C++ code.<br>
+              Qt is produced by Digia's Qt Development Frameworks division and is available under LGPL license.<br>
+              QxOrm is compatible with a lot of Qt's objects : <i>QObject, QString, QDate, QTime, QDateTime, QList, QHash, QSharedPointer, QScopedPointer...</i><br>
+              It is recommended to install the latest version of Qt available at the following address : <a href="http://qt.digia.com/" target="_blank">http://qt.digia.com/</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <p></p>
+        <br><b>QxOrm</b> library history :
+        <table border="1" style="width: 100%" bgcolor="#FFFFFF">
+          <col>
+          <tbody>
+            <tr>
+              <td><i>
+Changes in version 1.2.9:<br>
+- Improve nested models in QxModelView module to be able to use several relationships levels in QML<br>
+<br>
+Changes in version 1.2.8:<br>
+- New function qx::model_view::create_nested_model (QxModelView module) used by QxEntityEditor to manage complex data structure to work with relationships in QML views and Qt model/view architecture<br>
+- New section in the QxOrm.pri file with some tips to reduce output binaries size<br>
+- Fix the call of triggers to have the inserted ID inside the trigger function with PostgreSQL<br>
+<br>
+Changes in version 1.2.7:<br>
+- New module QxModelView : now, all classes registered into QxOrm context can be used with Qt model/view architecture (Qt widgets and/or QML views)<br>
+- qx::IxModel interface provides an easy way to work on QML with QxOrm library and interact with databases<br>
+- For more details about the new module QxModelView, goto the FAQ : 'How to use QxModelView module to interact with Qt model/view architecture (Qt widgets and/or QML views) ?'<br>
+- New function qx::dao::save_with_relation_recursive(), useful to save a full tree structure for example<br>
+- Remove the dependency on the STL compatibility functions in Qt (QT_NO_STL), which may not be available (thanks to KDE Plasma Media Center team for the patch)<br>
+- Support database table defined into a schema (using qx::IxDataMember::setName() function)<br>
+<br>
+Changes in version 1.2.6:<br>
+- First version full compatible with QxEntityEditor application : the graphic editor for QxOrm library !<br>
+- For more details about QxEntityEditor, go to QxOrm website : http://www.qxorm.com/<br>
+- Thanks to the recent release of Qt 5.2, QxOrm library can now be used on Android and iOS<br>
+- Improve relationships and triggers engine<br>
+- Triggers onBeforeFetch() and onAfterFetch() called when fetching relationships<br>
+- Fix release mode detection during compilation : should improve performance on some environments<br>
+- Add serialization for QSqlError, qx::QxSqlQuery, qx::QxInvalidValue and qx::QxInvalidValueX classes<br>
+<br>
+Changes in version 1.2.5:<br>
+- New license : go to download page of QxOrm website for more details<br>
+- Support Qt5<br>
+- New compiler supported : Clang (tested on Mac OS X)<br>
+- Now each QxOrm version will be tested in 32-bit and 64-bit mode<br>
+- Improve QxOrm introspection engine : possibility to register static class methods<br>
+- Improve QxService module : now it's easy to add an authentication process on server side<br>
+- New class qx::exception to get error code + error description with services methods throwing an exception<br>
+- New settings available in QxOrm.pri config file (whithout changing QxConfig.h file)<br>
+- Possibility to implement specifics database SQL functions overriding qx_query class<br>
+- Fix an issue when fetching multiple levels of relationship and NULL pointers<br>
+- Fix a bug with MS SQL Server database and update queries using auto-increment id<br>
+<br>
+Changes in version 1.2.4:<br>
+- New relationship engine to fetch easily many levels of relationships per query<br>
+- For more details about this new engine, goto the FAQ : 'How to use relationship engine to fetch datas from many tables ?'<br>
+- Add 2 functions : qx::dao::execute_query and qx::dao::call_query to call a stored procedure or a custom SQL query<br>
+- For more details about this new feature, goto the FAQ : 'How to execute a stored procedure or a custom SQL query ?'<br>
+- Add support for boost::optional type to manage NULL database value without using QVariant type<br>
+- New class : qx::QxDaoAsync to make easier to execute queries in asynchronous way (multi-thread)<br>
+- For more details about this new class, goto the FAQ : 'How to use qx::QxDaoAsync class to execute queries in asynchronous way (multi-thread) ?'<br>
+<br>
+Changes in version 1.2.3:<br>
+- New interface 'qx::IxPersistable' (abstract class) to simplify polymorphism using QxOrm library<br>
+- For more details about this new interface, goto the FAQ : 'How to use qx::IxPersistable interface ?'<br>
+- New methods into 'qx::IxCollection' interface to iterate over each items without knowing its type<br>
+- New option into 'QxOrm.pri' file to build QxOrm library statically (see '_QX_STATIC_BUILD' option)<br>
+- New triggers : 'qx::dao::on_before_fetch' and 'qx::dao::on_after_fetch' (for more details, goto the FAQ : 'How to define a Trigger with QxOrm ?')<br>
+- Add 'std::type_info' class information to introspection engine<br>
+- Some minor bugs fixed ('qx::dao::sql_error' exception message, SQL query column alias, mutex, etc.)<br>
+<br>
+Changes in version 1.2.2:<br>
+- New module to provide a validation engine : QxValidator module<br>
+- For more details about QxValidator module, goto the FAQ of QxOrm library : 'How to use QxValidator module to validate automatically an instance ?'<br>
+- Fix last insert ID with PostgreSQL using 'RETURNING' keyword : fetch inserted ID instead of OID<br>
+- Improve SQL generator providing the good SQL type for all databases<br>
+- Add support for special database keywords using '[', ']' and '"' characters<br>
+<br>
+Changes in version 1.2.1:<br>
+- Improve 'qx::QxSqlQuery' class : new engine to build queries without writing SQL, for more details, see the FAQ 'How to build a query without writing SQL with the class qx::QxSqlQuery ?'<br>
+- Improve 'qx::QxSession' class : provide persistent methods (CRUD) without using 'qx::dao::xxx' functions, for more details, see the FAQ 'How to use a session (qx::QxSession class) to manage automatically database transactions (using C++ RAII) ?'<br>
+- Implement 'repository' pattern to provide a common interface for persistent methods (CRUD) with 3 new classes : 'qx::IxRepository', 'qx::QxRepository&lt;T&gt;' and 'qx::QxRepositoryX'<br>
+- Possibility to serialize a QVariant 'UserType' with serialization engine of QxOrm library<br>
+- Improve thread-safe 'qx::cache' : add insertion date-time into the cache to verify that an element must be updated or not, for more details, see the FAQ 'How to use the cache (functions into namespace qx::cache) of QxOrm library ?'<br>
+- FAQ updated on QxOrm website with now 28 questions and answers<br>
+<br>
+Changes in version 1.1.9:<br>
+- Possibility to register automatically Qt meta-properties (using Q_PROPERTY macro) to QxOrm context without writing mapping function per class (void qx::register_class&lt;T&gt;())<br>
+- Strong integration with Qt introspection/moc engine : for more details about this new feature, goto the FAQ 'How to register automatically Qt meta-properties to QxOrm context ?'<br>
+- Improve introspection/reflection engine : see the FAQ (How to use introspection engine (or reflection engine) of QxOrm library ?) for more details<br>
+- Possibility to add meta-data (using a property bag) to introspection engine : see 'IxClass', 'IxDataMember' and 'IxFunction' classes for more details<br>
+- Add function 'qx::QxClassX::dumpSqlSchema()' to explain how to create your own SQL schema based on C++ classes<br>
+- New class 'qx::QxSimpleCrypt' to provide encryption/decryption (thanks very much to Andre Somers) : so it's now possible to store encrypted data into database without using an external library<br>
+- QxService module : new feature to encrypt/decrypt data before transfering it over network<br>
+<br>
+Changes in version 1.1.8:<br>
+- QxOrm library can now be used on Mac (thanks very much to Dominique Billet) : see 'osx_build_all_debug.sh' and 'osx_build_all_release.sh' scripts to build QxOrm library and all samples in './test/' directory<br>
+- Add 'qx::QxSession' class : define a session to manage automatically database transactions (using C++ RAII), see the FAQ for more details<br>
+- Add 'qx::QxDateNeutral', 'qx::QxTimeNeutral' and 'qx::QxDateTimeNeutral' classes : helper classes to store date-time value into database under neutral format =&gt; cross database compatibility<br>
+<br>
+Changes in version 1.1.7:<br>
+- Add soft delete behavior : see the FAQ (How to define a soft delete behavior ?) for more details about this new feature<br>
+- Add functions into namespace 'qx::dao' to update an element with a SQL condition : update_by_query, update_optimized_by_query, etc.<br>
+- Fix a bug when QVariant type is used for a property of a persistent class : so, it's now possible to insert NULL value into database<br>
+<br>
+Changes in version 1.1.6:<br>
+- QxOrm library online documentation available : 'http://www.qxorm.com/doxygen/index.html'<br>
+- Possibility to disable QtGui dependency using compilation option in 'QxConfig.h' file : _QX_ENABLE_QT_GUI_DEPENDENCY<br>
+- Possibility to disable QtNetwork dependency (so QxService module too) using compilation option in 'QxConfig.h' file : _QX_ENABLE_QT_NETWORK_DEPENDENCY<br>
+- Provide a new macro to register abstract class into QxOrm context : QX_REGISTER_ABSTRACT_CLASS()<br>
+<br>
+Changes in version 1.1.5:<br>
+- New feature available : 'QxService' module to create C++ application server<br>
+- 'QxService' provides an easy and powerful way to create services and to transfer data over network<br>
+- New tutorial available to explain how 'QxService' module works<br>
+- New sample available at './test/qxClientServer' directory<br>
+- QxOrm can be built with 'CONFIG += no_keywords' flag in '*.pro' files<br>
+- Bug fix with 'qx::dao::create_table&lt;&gt;' function and relation 'many-to-many'<br>
+- QxOrm should now build fine with GCC &lt;= 4.2<br>
+<br>
+Changes in version 1.1.4:<br>
+- New parameter in functions 'qx::dao::fetch_by_id', 'qx::dao::fetch_all', 'qx::dao::fetch_by_query' and 'qx::dao::update' to define a list of properties to fetch/update (by default, all properties are fetched/updated)<br>
+- Support multi-columns primary key (composite key) : see sample './test/qxBlogCompositeKey/'<br>
+- Improve strategy of inheritance : QxOrm supports 'Concrete Table Inheritance' strategy ('Concrete Table Inheritance' becomes default strategy)<br>
+- New smart-pointer 'qx::dao::ptr&lt;T&gt;' based on Qt 'QSharedPointer&lt;T&gt;' to provide 2 new features : 'is dirty' and 'update optimized'<br>
+- 'qx::dao::ptr&lt;T&gt;' can be used with a simple object and with many containers (stl, boost, Qt and 'qx::QxCollection' containers)<br>
+- 'qx::dao::ptr&lt;T&gt;' keeps original values from database and provides a 'isDirty()' method to retrieve all properties changed<br>
+- 'qx::dao::update_optimized' must be used with 'qx::dao::ptr&lt;T&gt;' to save into database only properties changed<br>
+<br>
+Changes in version 1.1.3:<br>
+- This version works fine with MinGW on Windows<br>
+<br>
+Changes in version 1.1.2:<br>
+- License LGPL<br>
+- Fix compilation problems on Linux and boost &gt; 1.38<br>
+- Fix sql query with MySql database<br>
+- Disable assert when qx::dao functions return an error<br>
+<br>
+Changes in version 1.1.1:<br>
+- This version supports Visual Studio 2010<br>
+<br>
+Changes in version 1.1.0:<br>
+- First release<br>
+              </i></td>
+            </tr>
+          </tbody>
+        </table>
+        <p></p>
+        <br><b>QxEntityEditor</b> application history :
+        <table border="1" style="width: 100%" bgcolor="#FFFFFF">
+          <col>
+          <tbody>
+            <tr>
+              <td><i>
+Changes in version QxEntityEditor 1.1.6:<br>
+- New javascript engine to customize the C++ and DDL SQL export process writing your own custom script<br>
+- Integrated debugger to debug your own custom javascript files (for example, putting a breakpoint or logging some traces)<br>
+- New plugin to print the entities diagram as a PNG image file and PDF file<br>
+- New property parameter UNIQUE (in property params window) used by the DDL SQL generator to create the database schema<br>
+- Improve nested models in QxModelView module to be able to use several relationships levels in QML<br>
+- Possibility to change the order in the list of properties and list of relationships of an entity<br>
+- Change encoding of generated files : now files are UTF-8<br>
+- Possibility to put a relative path to the QxEntityEditor project file (*.qxee file) in each plugin location settings<br>
+<br>
+Changes in version QxEntityEditor 1.1.5:<br>
+- New C++ model/view export plugin to manage complex data structure to work with relationships in QML views and Qt model/view architecture (using QxModelView module of QxOrm library)<br>
+- Now, with this new export plugin, working on QML with C++ entities has never been so easy !<br>
+- New function, menu "Tools &gt;&gt; Plugins scripts", to define your own custom scripts before/after a plugin execution<br>
+- New command line parameter --log_sql to trace all SQL queries executed by QxEntityEditor : a QxEntityEditor project file (*.qxee) is just a SQLite database, so it's easy to write your own script to customize some default behaviour<br>
+- New option in the C++ export plugin to generate or not the custom directory with all custom files for each entity<br>
+- Scrollbar available in the entities viewer<br>
+<br>
+Changes in version QxEntityEditor 1.1.4:<br>
+- Improve import by ODBC plugin to manage relationship, schema and composite key for SQLite, MySQL, PostgreSQL, Oracle and MS SQL Server databases<br>
+- New import from SQLite plugin to import SQLite database structure into QxEntityEditor project without having to create an ODBC DSN connexion<br>
+- Improve C++ export plugin : add a set of useful methods in generated classes + option to manage relative path to QxOrm library<br>
+- New menu to rename a namespace (move all entities to another namespace) and delete a list of entities by namespace<br>
+- Fix a bug when executing QxEntityEditor in command line (no GUI)<br>
+- Add a viewer mode to open a QxEntityEditor project with unlimited entities count without having a license key (read-only mode)<br>
+<br>
+Changes in version QxEntityEditor 1.1.3 (first official release):<br>
+- New plugin to transfer your data model over network and create quickly client/server applications, using QxService module<br>
+- New options to define entity, enum and comment width in entities viewer<br>
+<br>
+Changes in version QxEntityEditor 1.1.2 (BETA):<br>
+- New plugin to generate DDL SQL script (database schema) for SQLite, MySQL, PostgreSQL, Oracle and MS SQL Server databases<br>
+- The new DDL SQL plugin manages automatically schema evolution for each project version (ALTER TABLE, ADD COLUMN, DROP INDEX, etc.)<br>
+- Add post-it or comments in the entities viewer<br>
+- Option to display or not property type in the entities viewer<br>
+<br>
+Changes in version QxEntityEditor 1.1.1 (BETA):<br>
+- First BETA version of QxEntityEditor application<br>
+- Provide a graphic way to manage the data model for QxOrm library<br>
+- Multi-platform (available for Windows, Linux and Mac OS X) and generate native code for all environments : desktop (Windows, Linux, Mac OS X), embedded and mobile (Android, iOS, Raspberry Pi, etc.)<br>
+- Based on plugins and provides many ways to import/export the data model<br>
+- Generate C++ persistent classes automatically (registered into QxOrm context)<br>
+              </i></td>
+            </tr>
+          </tbody>
+        </table>
+        <p></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br><hr style="width: 80%" align="center" size="1" color="#100D5A">
+<table border="0" style="width: 80%" align="center">
+  <col><col><col>
+  <tbody>
+    <tr>
+      <td align="left" valign="middle">
+        <img alt="QxOrm" src="./resource/logo_qxorm_small.png" width="168" height="40">
+      </td>
+      <td align="center" valign="middle">
+        <font size="2">© 2014 Lionel Marty - <a href="mailto:contact@qxorm.com">contact@qxorm.com</a></font>
+      </td>
+      <td align="right" valign="middle">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+           <input type="hidden" name="cmd" value="_s-xclick">
+           <input type="hidden" name="hosted_button_id" value="2K4Z58ZYAYJ6S">
+           <input type="image" src="./resource/paypal_support_qxorm_library.gif" border="0" name="submit" alt="Support QxOrm library - PayPal">
+           <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+        </form>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
