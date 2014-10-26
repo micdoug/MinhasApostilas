@@ -64,7 +64,7 @@ class Documento: public Utils::INotifyPropertyChanged, public Utils::IPropertyGe
             PROPERTY(m_codigo, name="codigo", column="c_codigo", key=true)
             PROPERTY(m_nome, name="nome", column="c_nome", required=true, maxlength=200, unique=true)
             PROPERTY(m_descricao, name="descricao", column="c_descricao", required=false, maxlength=1000)
-            PROPERTY(m_ultimaAlteracao, name="ultimaAlteracao", column="c_ultimaAlteracao", required=true)
+            PROPERTY(m_ultimaAlteracao, name="ultimaAlteracao", column="c_ultimaalteracao", required=true)
             PROPERTY(m_versao, name="versao", column="c_versao", required=true)
             PROPERTY(m_arquivo, name="arquivo", column="c_arquivo", required=true)
         ORM4QT_END
@@ -77,7 +77,7 @@ class Documento: public Utils::INotifyPropertyChanged, public Utils::IPropertyGe
     #pragma db member(Documento::m_codigo) id auto column("c_codigo")
     #pragma db member(Documento::m_nome) not_null unique column("c_nome")
     #pragma db member(Documento::m_descricao) null column("c_descricao")
-    #pragma db member(Documento::m_ultimaAlteracao) not_null column("c_ultimaAlteracao")
+    #pragma db member(Documento::m_ultimaAlteracao) not_null column("c_ultimaalteracao")
     #pragma db member(Documento::m_versao) not_null column("c_versao")
     #pragma db member(Documento::m_arquivo) not_null column("c_arquivo")
     #pragma db member(Documento::m_propriedades) transient

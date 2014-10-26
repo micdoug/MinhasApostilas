@@ -227,6 +227,7 @@ void JanelaPrincipal::adicionarDocumento()
             watcher->deleteLater();
         });
         auto doc = form.documento();
+        doc.clearObservers();
         QFuture<bool> future = QtConcurrent::run([this, doc]{
             auto doctemp = doc;
             return m_repositorio->createObject(doctemp);
@@ -283,6 +284,7 @@ void JanelaPrincipal::editarDocumento()
         return;
     }
     doc = form.documento();
+    doc.clearObservers();
 
     //Criando tarefa assíncrona
     watcher = new QFutureWatcher<bool>(this);
