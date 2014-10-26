@@ -52,17 +52,8 @@ bool DocumentoRepositorioODB::updateObject(Entidades::Documento &object)
         //Ativando debug
         t.tracer(stderr_tracer);
 
-        //Carregando registro atual do banco de dados e atualizando o valor dos atributos
-        DocumentoPtr documento(m_database->load<Entidades::Documento>(object.codigo()));
-        documento->setCodigo(object.codigo());
-        documento->setNome(object.nome());
-        documento->setDescricao(object.descricao());
-        documento->setUltimaAlteracao(object.ultimaAlteracao());
-        documento->setArquivo(object.arquivo());
-        documento->setVersao(object.versao());
-
         //Atualizando registro no banco de dados
-        m_database->update<Entidades::Documento>(*documento);
+        m_database->update<Entidades::Documento>(object);
 
         //Concluindo transação
         t.commit();
@@ -112,14 +103,52 @@ bool DocumentoRepositorioODB::selectObjects(QList<Entidades::Documento> &list, Q
         t.tracer(stderr_tracer);
 
         //Construindo cláusula where e orderby
-        Where w;
-        montarWhereOrderBy(filters, w);
-        //Efetuando pesquisa no banco de dados
-        Result res(m_database->query<Entidades::Documento>(w));
-        //Preenchendo lista com resultados
-        for(Entidades::Documento doc : res)
+        std::unique_ptr<Where> where(construirWhere(filters));
+        std::unique_ptr<Where> orderby(construirOrderBy(filters));
+        std::unique_ptr<Where> limitOffset(construirLimitOffset(filters));
+
+        odb::result<Entidades::DocumentoView> resultado;
+        if(where != nullptr)
         {
-            list.append(Entidades::Documento(doc));
+            Where filtro = *where;
+            if(orderby != nullptr)
+            {
+                filtro = filtro + (*orderby);
+            }
+            if(limitOffset != nullptr)
+            {
+                filtro = filtro + (*limitOffset);
+            }
+            resultado = m_database->query<Entidades::DocumentoView>(filtro);
+        }
+        else if(orderby != nullptr)
+        {
+            Where filtro = "true" + (*orderby);
+            if(limitOffset != nullptr)
+            {
+                filtro = filtro + (*limitOffset);
+            }
+            resultado = m_database->query<Entidades::DocumentoView>(filtro);
+        }
+        else if(limitOffset != nullptr)
+        {
+            resultado = m_database->query<Entidades::DocumentoView>("true"+(*limitOffset));
+        }
+        else
+        {
+            resultado = m_database->query<Entidades::DocumentoView>();
+        }
+
+        //Preenchendo lista com resultados
+        for(Entidades::DocumentoView docview : resultado)
+        {
+            Entidades::Documento doc;
+            doc.setCodigo(docview.codigo);
+            doc.setNome(docview.nome);
+            doc.setDescricao(docview.descricao);
+            doc.setUltimaAlteracao(docview.ultimaAlteracao);
+            doc.setVersao(docview.versao);
+            list.append(doc);
         }
 
         //Concluindo transação
@@ -145,11 +174,18 @@ bool DocumentoRepositorioODB::countObjects(int &count, QMap<QString, QVariant> f
         t.tracer(stderr_tracer);
 
         //Construindo cláusula where e orderby
-        Where w;
-        montarWhereOrderBy(filters, w);
-        //Efetuando pesquisa no banco de dados
-        odb::result<Entidades::DocumentoInfo> res(m_database->query<Entidades::DocumentoInfo>(w));
-        count = res.begin()->quantidade;
+        std::unique_ptr<Where> where(construirWhere(filters));
+        odb::result<Entidades::DocumentoInfo> resultado;
+        if(where != nullptr)
+        {
+            resultado = m_database->query<Entidades::DocumentoInfo>(*where);
+        }
+        else
+        {
+            resultado = m_database->query<Entidades::DocumentoInfo>();
+        }
+
+        count = resultado.begin()->quantidade;
 
         //Concluindo transação
         t.commit();
@@ -190,10 +226,9 @@ bool DocumentoRepositorioODB::getObject(const QVariant &id, Entidades::Documento
     }
 }
 
-void DocumentoRepositorioODB::montarWhereOrderBy(QMap<QString, QVariant> filters, odb::query<Entidades::Documento> &where)
+odb::query<Entidades::Documento> *DocumentoRepositorioODB::construirWhere(QMap<QString, QVariant> filters)
 {
     QList<Where> whereList;
-    QList<Where> orderbyList;
 
     //Verificando filtros para a propriedade código
     if(filters.contains("codigo="))
@@ -207,10 +242,6 @@ void DocumentoRepositorioODB::montarWhereOrderBy(QMap<QString, QVariant> filters
     if(filters.contains("codigo<="))
     {
         whereList.append(Where::codigo <= Where::_val(filters["codigo<="].toLongLong()));
-    }
-    if(filters.contains("codigoOrderBy"))
-    {
-        orderbyList.append(Where::codigo + filters["codigoOrderBy"].toString().toUpper().toStdString());
     }
     //Fim verificando filtros para a propriedade código
 
@@ -231,13 +262,9 @@ void DocumentoRepositorioODB::montarWhereOrderBy(QMap<QString, QVariant> filters
     {
         whereList.append(Where::nome.like("%"+filters["nomeEndsWith"].toString()));
     }
-    if(filters.contains("nomeOrderBy"))
-    {
-        orderbyList.append(Where::nome + filters["nomeOrderBy"].toString().toUpper().toStdString());
-    }
     //Fim verificando filtros para a propriedade nome
 
-    //Verificando filtros para a propriedade descricao
+    //Verificando filtros para a propriedade descrição
     if(filters.contains("descricao="))
     {
         whereList.append(Where::descricao == Where::_val(filters["descricao="].toString()));
@@ -254,13 +281,9 @@ void DocumentoRepositorioODB::montarWhereOrderBy(QMap<QString, QVariant> filters
     {
         whereList.append(Where::descricao.like("%"+filters["descricaoEndsWith"].toString()));
     }
-    if(filters.contains("descricaoOrderBy"))
-    {
-        orderbyList.append(Where::descricao + filters["descricaoOrderBy"].toString().toUpper().toStdString());
-    }
-    //Fim verificando filtros para a propriedade descricao
+    //Fim verificando filtros para a propriedade descrição
 
-    //Verificando filtros para a propriedade ultimaAlteracao
+    //Verificando filtros para a propriedade ultima alteração
     if(filters.contains("ultimaAlteracao="))
     {
         whereList.append(Where::ultimaAlteracao == Where::_val(filters["ultimaAlteracao="].toDateTime()));
@@ -273,13 +296,9 @@ void DocumentoRepositorioODB::montarWhereOrderBy(QMap<QString, QVariant> filters
     {
         whereList.append(Where::ultimaAlteracao <= Where::_val(filters["ultimaAlteracao<="].toDateTime()));
     }
-    if(filters.contains("ultimaAlteracaoOrderBy"))
-    {
-        orderbyList.append(Where::ultimaAlteracao + filters["ultimaAlteracaoOrderBy"].toString().toUpper().toStdString());
-    }
-    //Fim verificando filtros para a propriedade ultimaAlteracao
+    //Fim verificando filtros para a propriedade ultima alteração
 
-    //Verificando filtros para a propriedade versao
+    //Verificando filtros para a propriedade versão
     if(filters.contains("versao="))
     {
         whereList.append(Where::versao == Where::_val(filters["versao="].value<quint16>()));
@@ -292,46 +311,88 @@ void DocumentoRepositorioODB::montarWhereOrderBy(QMap<QString, QVariant> filters
     {
         whereList.append(Where::versao <= Where::_val(filters["versao<="].value<quint16>()));
     }
-    if(filters.contains("versaoOrderBy"))
-    {
-        orderbyList.append(Where::versao + filters["versaoOrderBy"].toString().toUpper().toStdString());
-    }
-    //Fim verificando filtros para a propriedade versao
+    //Fim verificando filtros para a propriedade versão
 
-    if(!whereList.isEmpty())
+    //Verificando se é necessário montar objeto de pesquisa
+    if(whereList.isEmpty())
     {
-        where = whereList.first();
+        return nullptr;
+    }
+    else
+    {
+        Where where = whereList.first();
+        //Combinando clásulas where
         for(int i = 1; i<whereList.size(); ++i)
         {
             where = where && whereList[i];
         }
+        return new Where(where);
+    }
+}
+
+odb::query<Entidades::Documento> *DocumentoRepositorioODB::construirOrderBy(QMap<QString, QVariant> filters)
+{
+    QList<Where> orderbyList;
+
+    //Verificando ordenação para a propriedade código
+    if(filters.contains("codigoOrderBy"))
+    {
+        orderbyList.append(Where::codigo + filters["codigoOrderBy"].toString().toUpper().toStdString());
     }
 
-    //Adicionando cláusula orderby
-    if(!orderbyList.isEmpty())
+    //Verificando ordenação para a propriedade nome
+    if(filters.contains("nomeOrderBy"))
     {
-        if(whereList.isEmpty())
-        {
-            where = "ORDER BY" + orderbyList.first();
-        }
-        else
-        {
-            where = where + "ORDER BY" + orderbyList.first();
-        }
+        orderbyList.append(Where::nome + filters["nomeOrderBy"].toString().toUpper().toStdString());
+    }
+
+    //Verificando ordenação para a propriedade descrição
+    if(filters.contains("descricaoOrderBy"))
+    {
+        orderbyList.append(Where::descricao + filters["descricaoOrderBy"].toString().toUpper().toStdString());
+    }
+
+    //Verificando ordenação para a propriedade última alteração
+    if(filters.contains("ultimaAlteracaoOrderBy"))
+    {
+        orderbyList.append(Where::ultimaAlteracao + filters["ultimaAlteracaoOrderBy"].toString().toUpper().toStdString());
+    }
+
+    //Verificando ordenação para a propriedade versão
+    if(filters.contains("versaoOrderBy"))
+    {
+        orderbyList.append(Where::versao + filters["versaoOrderBy"].toString().toUpper().toStdString());
+    }
+
+    //Verificando se é necessário montar cláusula
+    if(orderbyList.isEmpty())
+    {
+        return nullptr;
+    }
+    else
+    {
+        Where where = "ORDER BY" + orderbyList.first();
+        //Combinando cláusulas orderby
         for(int i = 1; i<orderbyList.size(); ++i)
         {
             where = where + orderbyList[i];
         }
+        return new Where(where);
     }
 
+}
+
+odb::query<Entidades::Documento> *DocumentoRepositorioODB::construirLimitOffset(QMap<QString, QVariant> filters)
+{
     //Adicionando limit e offset
-//    if(filters.contains("limit"))
-//    {
-//        if(whereList.isEmpty() && !addOrderby)
-//            where = "LIMIT" + Where::_val(filters["limit"].toInt()) + "OFFSET" + Where::_val(filters["offset"].toInt());
-//        else
-//            where = where + "LIMIT" + Where::_val(filters["limit"].toInt()) + "OFFSET" + Where::_val(filters["offset"].toInt());
-//    }
+    if(filters.contains("limit"))
+    {
+        return new Where("LIMIT" + Where::_val(filters["limit"].toInt()) + "OFFSET" + Where::_val(filters["offset"].toInt()));
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 } // namespace Repositorios

@@ -89,6 +89,21 @@ class Documento: public Utils::INotifyPropertyChanged, public Utils::IPropertyGe
         std::size_t quantidade;
     };
 
+    #pragma db view object(Documento)
+    struct DocumentoView
+    {
+        #pragma db column(Documento::m_codigo)
+        qlonglong codigo;
+        #pragma db column(Documento::m_nome)
+        QString nome;
+        #pragma db column(Documento::m_descricao)
+        QString descricao;
+        #pragma db column(Documento::m_ultimaAlteracao)
+        QDateTime ultimaAlteracao;
+        #pragma db column(Documento::m_versao)
+        quint16 versao;
+    };
+
 
 } // namespace Entidades
 

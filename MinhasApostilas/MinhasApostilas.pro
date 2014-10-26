@@ -97,9 +97,7 @@ ODB_FILES += Entidades/documento.h
 ODB_FLAGS = --database pgsql --profile qt --generate-query --std c++11
 
 # Adicionando diretivas do linker para adicionar bibliotecas odb
-LIBS += -lodb-pgsql
-LIBS += -lodb-qt
-LIBS += -lodb
+LIBS += -lodb-pgsql -lodb-qt -lodb
 
 #Adicionado diretório de headers do framework Qt ao comando do odb compiler
 ODB_FLAGS += -I$$[QT_INSTALL_HEADERS] -I$$[QT_INSTALL_HEADERS]/QtCore

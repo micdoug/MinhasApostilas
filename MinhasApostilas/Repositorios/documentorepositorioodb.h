@@ -28,8 +28,12 @@ public:
 private:
     odb::database *m_database;
 
-    //Método utilizado para montar a lista de where e orderby
-    void montarWhereOrderBy(QMap<QString, QVariant> filters, odb::query<Entidades::Documento> &where);
+    //Método utilizado para montar a cláusula where
+    odb::query<Entidades::Documento> *construirWhere(QMap<QString, QVariant> filters);
+    //Método utilizado pra montar a cláusula orderby
+    odb::query<Entidades::Documento> *construirOrderBy(QMap<QString,QVariant> filters);
+    //Método utilizado para combinar a cláusula limit offset
+    odb::query<Entidades::Documento> *construirLimitOffset(QMap<QString,QVariant> filters);
 };
 
 } // namespace Repositorios
