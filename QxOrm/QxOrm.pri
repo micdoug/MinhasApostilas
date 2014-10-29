@@ -62,12 +62,12 @@ isEmpty(QX_BOOST_LIB_SERIALIZATION_RELEASE) { QX_BOOST_LIB_SERIALIZATION_RELEASE
 # isEmpty(QX_BOOST_LIB_WIDE_SERIALIZATION_DEBUG) { QX_BOOST_LIB_WIDE_SERIALIZATION_DEBUG = "boost_wserialization-mt-d" }
 # isEmpty(QX_BOOST_LIB_WIDE_SERIALIZATION_RELEASE) { QX_BOOST_LIB_WIDE_SERIALIZATION_RELEASE = "boost_wserialization-mt" }
 } else {
-isEmpty(QX_BOOST_INCLUDE_PATH) { QX_BOOST_INCLUDE_PATH = $$quote(D:/Dvlp/_Libs/Boost/1_54/include) }
-isEmpty(QX_BOOST_LIB_PATH) { QX_BOOST_LIB_PATH = $$quote(D:/Dvlp/_Libs/Boost/1_54/lib_shared) }
-isEmpty(QX_BOOST_LIB_SERIALIZATION_DEBUG) { QX_BOOST_LIB_SERIALIZATION_DEBUG = "boost_serialization-vc110-mt-gd-1_54" }
-isEmpty(QX_BOOST_LIB_SERIALIZATION_RELEASE) { QX_BOOST_LIB_SERIALIZATION_RELEASE = "boost_serialization-vc110-mt-1_54" }
-# isEmpty(QX_BOOST_LIB_WIDE_SERIALIZATION_DEBUG) { QX_BOOST_LIB_WIDE_SERIALIZATION_DEBUG = "boost_wserialization-vc110-mt-gd-1_54" }
-# isEmpty(QX_BOOST_LIB_WIDE_SERIALIZATION_RELEASE) { QX_BOOST_LIB_WIDE_SERIALIZATION_RELEASE = "boost_wserialization-vc110-mt-1_54" }
+isEmpty(QX_BOOST_INCLUDE_PATH) { QX_BOOST_INCLUDE_PATH = $$quote(C:/Qt/Bibliotecas/boost1.56/boost_1_56_0) }
+isEmpty(QX_BOOST_LIB_PATH) { QX_BOOST_LIB_PATH = $$quote(C:\Qt\Bibliotecas\boost1.56\boost_1_56_0\stage\lib) }
+isEmpty(QX_BOOST_LIB_SERIALIZATION_DEBUG) { QX_BOOST_LIB_SERIALIZATION_DEBUG = "boost_serialization-vc120-mt-gd-1_56" }
+isEmpty(QX_BOOST_LIB_SERIALIZATION_RELEASE) { QX_BOOST_LIB_SERIALIZATION_RELEASE = "boost_serialization-vc120-mt-1_56" }
+# isEmpty(QX_BOOST_LIB_WIDE_SERIALIZATION_DEBUG) { QX_BOOST_LIB_WIDE_SERIALIZATION_DEBUG = "boost_serialization-vc120-mt-gd-1_56" }
+# isEmpty(QX_BOOST_LIB_WIDE_SERIALIZATION_RELEASE) { QX_BOOST_LIB_WIDE_SERIALIZATION_RELEASE = "boost_serialization-vc120-mt-1_56" }
 } # unix
 
 ##############################

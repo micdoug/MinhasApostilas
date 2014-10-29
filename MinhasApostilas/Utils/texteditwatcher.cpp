@@ -21,7 +21,7 @@ void TextEditWatcher::keyPressEvent(QKeyEvent *event)
     {
         event->ignore();
     }
-    else if(event->text().at(0).isLetter())
+    else if ((event->key() >= Qt::Key_A && event->key() <= Qt::Key_Z) || event->text().compare("ç", Qt::CaseInsensitive)==0)
     {
         QPlainTextEdit::keyPressEvent(new QKeyEvent(QKeyEvent::KeyPress, event->key(), event->modifiers(), event->text().toUpper()));
     }

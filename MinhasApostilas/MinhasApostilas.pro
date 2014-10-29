@@ -11,6 +11,13 @@ QT       += core gui sql concurrent
 include(../QxOrm/QxOrm.pri)
 INCLUDEPATH += ../QxOrm/include
 
+#incluindo pasta do odb e boost no windows
+win32:{
+INCLUDEPATH += C:/Qt/Bibliotecas/libodb-2.3.0 \
+               C:/Qt/Bibliotecas/libodb-pgsql-2.3.1 \
+               C:/Qt/Bibliotecas/libodb-qt-2.3.1
+}
+
 #Ativando suporte a especificação C++11
 CONFIG += c++11
 
@@ -37,13 +44,15 @@ SOURCES += main.cpp\
     Utils/texteditwatcher.cpp \
     Formularios/editarfiltros.cpp \
     Repositorios/documentorepositorioodb.cpp \
-    Repositorios/documentorepositorioqxorm.cpp
+    Repositorios/documentorepositorioqxorm.cpp \
+    Entidades/documento-odb.cxx
 
 #Arquivos de cabeçalho
 HEADERS  += janelaprincipal.h \
     Utils/inotifypropertychanged.h \
     Utils/ipropertygetset.h \
     Entidades/documentomodel.h \
+    Entidades/documento.h \
     Repositorios/irepository.h \
     Repositorios/documentorepositorioorm4qt.h \
     Utils/number.h \
@@ -52,7 +61,8 @@ HEADERS  += janelaprincipal.h \
     Utils/texteditwatcher.h \
     Formularios/editarfiltros.h \
     Repositorios/documentorepositorioodb.h \
-    Repositorios/documentorepositorioqxorm.h
+    Repositorios/documentorepositorioqxorm.h \
+    Entidades/documento-odb.hxx
 
 #Arquivos de design de interface
 FORMS    += janelaprincipal.ui \
@@ -96,57 +106,63 @@ else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Orm4Qt/libOrm4Qt.a
 unix: QMAKE_CXXFLAGS_WARN_ON = $$QMAKE_CXXFLAGS_WARN_ON -Wno-unknown-pragmas
 
 #Lista de arquivos que devem ser compilados pelo odb compiler
-ODB_FILES += Entidades/documento.h
+#ODB_FILES += Entidades/documento.h
 
 #Flags do odb compiler
-ODB_FLAGS = --database pgsql --profile qt --generate-query --std c++11
+#ODB_FLAGS = --database pgsql --profile qt --generate-query --std c++11
 
 # Adicionando diretivas do linker para adicionar bibliotecas odb
-LIBS += -lodb-pgsql -lodb-qt -lodb
+unix: LIBS += -lodb-pgsql -lodb-qt -lodb
+win32:CONFIG(release, debug|release): LIBS += -lodb-pgsql -LC:/Qt/Bibliotecas/libodb-pgsql-2.3.1/lib64 \
+                                              -lodb-qt -LC:/Qt/Bibliotecas/libodb-qt-2.3.1/lib64 \
+                                              -lodb -LC:/Qt/Bibliotecas/libodb-2.3.0/lib64
+else:win32:CONFIG(debug, debug|release): LIBS += -lodb-pgsql-d -LC:/Qt/Bibliotecas/libodb-pgsql-2.3.1/lib64 \
+                                              -lodb-qt-d -LC:/Qt/Bibliotecas/libodb-qt-2.3.1/lib64 \
+                                              -lodb-d -LC:/Qt/Bibliotecas/libodb-2.3.0/lib64
 
 #Adicionado diretório de headers do framework Qt ao comando do odb compiler
-ODB_FLAGS += -I$$[QT_INSTALL_HEADERS] -I$$[QT_INSTALL_HEADERS]/QtCore
+#ODB_FLAGS += -I$$[QT_INSTALL_HEADERS] -I$$[QT_INSTALL_HEADERS]/QtCore
 
 #Incluindo pastas onde entidades são definidas nas diretivas de compilação para o odb conseguir resolver as referências
 INCLUDEPATH += ./Entidades
 
 #Ajustando caminho dos arquivos a serem compilados
-for(dir, ODB_FILES) {
-  ODB_PWD_FILES += $$PWD/$${dir}
-}
+#for(dir, ODB_FILES) {
+#  ODB_PWD_FILES += $$PWD/$${dir}
+#}
 
 #Ajustando outras propriedades do comando odb compiler
-odb.name = odb ${QMAKE_FILE_IN}
-odb.input = ODB_PWD_FILES
-odb.output = ${QMAKE_FILE_BASE}-odb.cxx
-odb.commands = odb $$ODB_FLAGS ${QMAKE_FILE_IN}
-odb.depends = $$ODB_PWD_FILES
-odb.variable_out = SOURCES
-odb.clean = ${QMAKE_FILE_BASE}-odb.cxx ${QMAKE_FILE_BASE}-odb.hxx ${QMAKE_FILE_BASE}-odb.ixx ${QMAKE_FILE_BASE}.sql
-QMAKE_EXTRA_COMPILERS += odb
+#odb.name = odb ${QMAKE_FILE_IN}
+#odb.input = ODB_PWD_FILES
+#odb.output = ${QMAKE_FILE_BASE}-odb.cxx
+#odb.commands = odb $$ODB_FLAGS ${QMAKE_FILE_IN}
+#odb.depends = $$ODB_PWD_FILES
+#odb.variable_out = SOURCES
+#odb.clean = ${QMAKE_FILE_BASE}-odb.cxx ${QMAKE_FILE_BASE}-odb.hxx ${QMAKE_FILE_BASE}-odb.ixx ${QMAKE_FILE_BASE}.sql
+#QMAKE_EXTRA_COMPILERS += odb
 
-odbh.name = odb ${QMAKE_FILE_IN}
-odbh.input = ODB_PWD_FILES
-odbh.output = ${QMAKE_FILE_BASE}-odb.hxx
-odbh.commands = @true
-odbh.CONFIG = no_link
-odbh.depends = ${QMAKE_FILE_BASE}-odb.cxx
-QMAKE_EXTRA_COMPILERS += odbh
+#odbh.name = odb ${QMAKE_FILE_IN}
+#odbh.input = ODB_PWD_FILES
+#odbh.output = ${QMAKE_FILE_BASE}-odb.hxx
+#odbh.commands = @true
+#odbh.CONFIG = no_link
+#odbh.depends = ${QMAKE_FILE_BASE}-odb.cxx
+#QMAKE_EXTRA_COMPILERS += odbh
 
 #############################################################################################
 ################# Fim configurações para usar o ODB Orm  ####################################
 #############################################################################################
 
-#Escolher qual orm usar
-#DEFINES += ORM_ORM4QT
-DEFINES += ORM_ODB
 
 DEFINES += COMPILANDO
 DEFINES += ORM4QT_DEBUG_SL
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../QxOrm/lib/ -lQxOrm
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../QxOrm/lib/ -lQxOrm
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../QxOrm/release -lQxOrm
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../QxOrm/debug/ -lQxOrm
 else:unix: LIBS += -L$$OUT_PWD/../QxOrm/lib -lQxOrm
 
 INCLUDEPATH += $$PWD/../QxOrm
 DEPENDPATH += $$PWD/../QxOrm
+
+OTHER_FILES += \
+    Entidades/documento-odb.ixx

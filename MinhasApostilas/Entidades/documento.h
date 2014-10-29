@@ -112,7 +112,7 @@ class Documento: public Utils::INotifyPropertyChanged, public Utils::IPropertyGe
 
 #ifdef COMPILANDO
 QX_REGISTER_PRIMARY_KEY(Entidades::Documento, qlonglong)
-QX_REGISTER_COMPLEX_CLASS_NAME_HPP(Entidades::Documento, qx::trait::no_base_class_defined, 0, Documento)
+QX_REGISTER_COMPLEX_CLASS_NAME_HPP_EXPORT_DLL(Entidades::Documento, qx::trait::no_base_class_defined, 0, Documento)
 #endif
 
 #endif // ENTIDADES_DOCUMENTO_H

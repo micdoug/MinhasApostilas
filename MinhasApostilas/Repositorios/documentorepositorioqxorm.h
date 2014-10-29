@@ -1,7 +1,7 @@
 #ifndef REPOSITORIOS_DOCUMENTOREPOSITORIOQXORM_H
 #define REPOSITORIOS_DOCUMENTOREPOSITORIOQXORM_H
 
-#include "Entidades/documento.h"
+#include "../Entidades/documento.h"
 #include "irepository.h"
 #include "QxDao/QxSqlQuery.h"
 

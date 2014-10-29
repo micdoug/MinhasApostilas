@@ -13,9 +13,10 @@ using namespace odb::core;
 
 namespace Repositorios {
 
-DocumentoRepositorioODB::DocumentoRepositorioODB(const QString &usuario, const QString &senha, const QString &banco, const QString &server, int port)
+DocumentoRepositorioODB::DocumentoRepositorioODB(std::string usuario, std::string senha, std::string banco, std::string server, int port)
 {
-    m_database = new odb::pgsql::database(usuario.toStdString(), senha.toStdString(), banco.toStdString(), server.toStdString(), port);
+    m_database = new odb::pgsql::database(usuario, senha, banco, server, port);
+    //m_database = new odb::pgsql::database("postgres", "postgres", "MinhasApostilas");
 }
 
 DocumentoRepositorioODB::~DocumentoRepositorioODB()

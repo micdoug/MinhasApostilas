@@ -1,8 +1,7 @@
 #ifndef REPOSITORIOS_DOCUMENTOREPOSITORIOODB_H
 #define REPOSITORIOS_DOCUMENTOREPOSITORIOODB_H
 
-#include <QString>
-
+#include <string>
 #include "irepository.h"
 #include "../Entidades/documento.h"
 #include <odb/database.hxx>
@@ -13,7 +12,7 @@ namespace Repositorios {
 class DocumentoRepositorioODB : public IRepository<Entidades::Documento>
 {
 public:
-    DocumentoRepositorioODB(const QString &usuario, const QString &senha, const QString &banco, const QString &server = "localhost", int port = 5432);
+    DocumentoRepositorioODB(std::string usuario, std::string senha, std::string banco, std::string server = "localhost", int port = 5432);
     virtual ~DocumentoRepositorioODB();
 
     //IRepository<Entidades::Documento> interface
