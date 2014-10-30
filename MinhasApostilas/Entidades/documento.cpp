@@ -1,8 +1,73 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: documento.cpp
+ * Descrição: Arquivo de implementação da classe Entidades::Documento.
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #include "documento.h"
 
-#ifdef COMPILANDO
+/*!
+ * \class Entidades::Documento
+ * Representa um documento em pdf que é armazenado pela aplicação.
+ * Os documentos são tratados na interface gráfica como apostilas.
+ */
+
+/*!
+ * \struct Entidades::DocumentoInfo
+ * Estrutura auxiliar utilizada para obter a quantidade de registros
+ * atualmente no banco de dados utilizando a biblioteca ORM ODB.
+ */
+
+/*!
+ * \variable Entidades::DocumentoInfo::quantidade
+ * Quantidade de registros de documentos retornada pelo banco de dados
+ * após aplicar uma consulta com filtros.
+ */
+
+/*!
+ * \struct Entidades::DocumentoView
+ * Estrutura auxiliar utilizada para exibir um conjunto de colunas
+ * específico da tabela de documentos presente no banco de dados
+ * utilizando a biblioteca ORM ODB.
+ */
+
+/*!
+ * \variable Entidades::DocumentoView::codigo
+ * Código de um documento.
+*/
+
+/*!
+ * \variable Entidades::DocumentoView::descricao
+ * Descrição de um documento.
+*/
+
+/*!
+ * \variable Entidades::DocumentoView::nome
+ * Nome de um documento.
+*/
+
+/*!
+ * \variable Entidades::DocumentoView::ultimaAlteracao
+ * Data/hora da última alteração de um documento.
+*/
+
+/*!
+ * \ Entidades::DocumentoView::versao
+ * Número da versão de um documento.
+*/
+
+/*!
+ * Namespace base para a definição das funcionalidades da biblioteca
+ * QxOrm.
+ */
 namespace qx
 {
+    /*!
+     * Método criado para definir mapeamento da classe Entidades::Documento
+     * utilizando a biblioteca ORM QxOrm.
+     */
     template<> void register_class(QxClass<Entidades::Documento> &t)
     {
         t.setName("t_documento");
@@ -14,14 +79,23 @@ namespace qx
         t.data(&Entidades::Documento::m_arquivo, "c_arquivo");
     }
 }
-#endif
 
+
+/*!
+ * Engloba as classes e estruturas de dados utilizadas para representar
+ * as entidades básicas do programa.
+ */
 namespace Entidades {
 
+/*!
+ * Construtor da classe. Inicializa o código do documento com o valor 0,
+ * a data e hora da última alteração com a hora atual e versão com o valor
+ * 1.
+ */
 Documento::Documento() :
     m_codigo(0L),
     m_ultimaAlteracao(QDateTime::currentDateTime()),
-    m_versao(1.0)
+    m_versao(1)
 {
     m_propriedades << "codigo"
                    << "nome"
@@ -31,14 +105,27 @@ Documento::Documento() :
                    << "arquivo";
 }
 
+/*!
+ * Destrutor.
+ */
 Documento::~Documento()
 {}
 
+/*!
+ * Código identificador único do documento.
+ * \return
+ * Valor atual do código.
+ */
 qlonglong Documento::codigo() const
 {
     return m_codigo;
 }
 
+/*!
+ * Ajusta o código do documento.
+ * \param codigo
+ * Novo valor para o código.
+ */
 void Documento::setCodigo(const qlonglong &codigo)
 {
     if(codigo != m_codigo)
@@ -48,11 +135,21 @@ void Documento::setCodigo(const qlonglong &codigo)
     }
 }
 
+/*!
+ * Nome do documento. Descrição breve da utilidade do documento.
+ * \return
+ * Valor atual do nome.
+ */
 QString Documento::nome() const
 {
     return m_nome;
 }
 
+/*!
+ * Ajusta o nome do documento.
+ * \param nome
+ * Novo valor para o nome.
+ */
 void Documento::setNome(const QString &nome)
 {
     if(nome != m_nome)
@@ -62,11 +159,21 @@ void Documento::setNome(const QString &nome)
     }
 }
 
+/*!
+ * Texto descritivo sobre o documento. Informação mais detalhada da utilidade do mesmo.
+ * \return
+ * Valor atual da descrição.
+ */
 QString Documento::descricao() const
 {
     return m_descricao;
 }
 
+/*!
+ * Ajusta a descrição do documento.
+ * \param descricao
+ * Novo valor para descrição.
+ */
 void Documento::setDescricao(const QString &descricao)
 {
     if(descricao != m_descricao)
@@ -76,11 +183,21 @@ void Documento::setDescricao(const QString &descricao)
     }
 }
 
+/*!
+ * Data e hora em que o documento foi alterado pela última vez.
+ * \return
+ * Valor atual da ultimaAlteracao.
+ */
 QDateTime Documento::ultimaAlteracao() const
 {
     return m_ultimaAlteracao;
 }
 
+/*!
+ * Ajusta a data/hora da última alteração do documento.
+ * \param ultimaAlteracao
+ * Novo valor para ultimaAlteracao.
+ */
 void Documento::setUltimaAlteracao(const QDateTime &ultimaAlteracao)
 {
     if(ultimaAlteracao != m_ultimaAlteracao)
@@ -89,11 +206,22 @@ void Documento::setUltimaAlteracao(const QDateTime &ultimaAlteracao)
         emitPropertyChanged("ultimaAlteracao", this->ultimaAlteracao());
     }
 }
+
+/*!
+ * Número de versão do documento armazenado.
+ * \return
+ * Valor atual da versão.
+ */
 quint16 Documento::versao() const
 {
     return m_versao;
 }
 
+/*!
+ * Ajusta a versão do documento.
+ * \param versao
+ * Novo valor para versão.
+ */
 void Documento::setVersao(const quint16 &versao)
 {
     if(versao != m_versao)
@@ -103,11 +231,21 @@ void Documento::setVersao(const quint16 &versao)
     }
 }
 
+/*!
+ * Dados em binário do arquivo armazenado.
+ * \return
+ * Valor atual de arquivo.
+ */
 QByteArray Documento::arquivo() const
 {
     return m_arquivo;
 }
 
+/*!
+ * Ajusta os dados do arquivo armazenado.
+ * \param arquivo
+ * Novos dados para armazenar.
+ */
 void Documento::setArquivo(const QByteArray &arquivo)
 {
     if(arquivo != m_arquivo)

@@ -1,3 +1,11 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: documentomodel.h
+ * Descrição: Arquivo de declaração da classe Entidades::DocumentoModel.
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #ifndef ENTIDADES_DOCUMENTOMODEL_H
 #define ENTIDADES_DOCUMENTOMODEL_H
 

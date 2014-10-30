@@ -1,7 +1,27 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: documentomodel.cpp
+ * Descrição: Arquivo de implementação da classe Entidades::DocumentoModel.
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #include "documentomodel.h"
+
+/*!
+ * \class Entidades::DocumentoModel
+ * Implementação de um model para preenchimento de table views utilizando
+ * listas de objetos da classe Entidades::Documento.
+ * \see Entidades::Documento
+ */
 
 namespace Entidades {
 
+/*!
+ * Construtor.
+ * \param parent
+ * Objeto responsável pela gerência de alocação deste objeto.
+ */
 DocumentoModel::DocumentoModel(QObject *parent) :
     QAbstractTableModel(parent)
 {
@@ -12,14 +32,28 @@ DocumentoModel::DocumentoModel(QObject *parent) :
                    << "versao";
 }
 
+/*!
+ * Destrutor.
+ */
 DocumentoModel::~DocumentoModel()
 {}
 
+/*!
+ * Lista de documentos que o model é responsável por providenciar
+ * para as table views.
+ * \return
+ * Lista de documentos atual.
+ */
 QList<Documento> DocumentoModel::documentos() const
 {
     return m_documentos;
 }
 
+/*!
+ * Ajusta a lista de documentos do model.
+ * \param documentos
+ * Nova lista de documentos.
+ */
 void DocumentoModel::setDocumentos(const QList<Documento> &documentos)
 {
     beginResetModel();
@@ -62,10 +96,12 @@ QVariant DocumentoModel::headerData(int section, Qt::Orientation orientation, in
 {
     if(role == Qt::DisplayRole)
     {
+        //Labels verticais são preenchidos com o número da linha
         if(orientation == Qt::Vertical)
         {
             return section + 1;
         }
+        //Labels horizontais são preenchidos com o nome da propriedade exibida
         else
         {
             switch (section)

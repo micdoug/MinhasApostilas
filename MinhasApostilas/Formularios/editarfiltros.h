@@ -1,3 +1,11 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: editarfiltros.h
+ * Descrição: Arquivo de declaração da classe Formularios::EditarFiltros.
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #ifndef EDITARFILTROS_H
 #define EDITARFILTROS_H
 
@@ -9,11 +17,11 @@
 namespace Ui {
 class EditarFiltros;
 }
+
 namespace Formularios {
     class EditarFiltros : public QDialog
     {
         Q_OBJECT
-
     public:
         explicit EditarFiltros(QMap<QString, QVariant> *filtros, QWidget *parent = 0);
         ~EditarFiltros();

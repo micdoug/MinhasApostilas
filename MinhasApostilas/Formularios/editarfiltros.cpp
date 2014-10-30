@@ -1,9 +1,36 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: editarfiltros.cpp
+ * Descrição: Arquivo de implementação da classe Formularios::EditarFiltros.
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #include "editarfiltros.h"
 #include "ui_editarfiltros.h"
 
+/*!
+ * \class Formularios::EditarFiltros
+ * Implementa uma janela de diálogo para edição de filtros de busca de registros
+ * de documentos. Na janela gerada é possível ativar, desativar e editar filtros
+ * relacionados à várias propriedades diferentes (nome, versão, etc), e com operações diferentes
+ * (contém, maior, menor, igual, etc).
+ */
+
+/*!
+ * Engloba as classes que implementam janelas de diálogo para o aplicativo.
+ * As janelas de diálogo são responsáveis por prover uma interface para edição
+ * de informações.
+ */
 namespace Formularios {
 
-
+/*!
+ * Construtor da janela.
+ * \param filtros
+ * Estrutura com os filtros que devem ser editados.
+ * \param parent
+ * Objeto responsável por gerenciar a alocação de memória desta instância.
+ */
 EditarFiltros::EditarFiltros(QMap<QString, QVariant> *filtros, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::EditarFiltros),
@@ -16,13 +43,17 @@ EditarFiltros::EditarFiltros(QMap<QString, QVariant> *filtros, QWidget *parent) 
     connect(this, &QDialog::accepted, this, [this]{exportarFiltros();});
 }
 
-
-
+/*!
+ * Destrutor
+ */
 EditarFiltros::~EditarFiltros()
 {
     delete ui;
 }
 
+/*!
+ * Preenche o formulário com os dados atuais da estrutura de filtros.
+ */
 void EditarFiltros::carregarFiltros()
 {
     //Aplicando filtros nos campos da propriedade código
@@ -130,6 +161,9 @@ void EditarFiltros::carregarFiltros()
     //Fim aplicando filtros na propriedade descricao
 }
 
+/*!
+ * Atualiza a estrutura de filtros com as informações que foram digitadas no formulário.
+ */
 void EditarFiltros::exportarFiltros()
 {
     //Carregando filtros para o código

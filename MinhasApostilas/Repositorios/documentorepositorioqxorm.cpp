@@ -77,6 +77,11 @@ bool DocumentoRepositorioQxOrm::countObjects(int &count, QMap<QString, QVariant>
 {
     filters.remove("limit");
     filters.remove("offset");
+    filters.remove("codigoOrderBy");
+    filters.remove("nomeOrderBy");
+    filters.remove("descricaoOrderBy");
+    filters.remove("ultimaAlteracaoOrderBy");
+    filters.remove("versaoOrderBy");
     long temp = 0;
     QSqlError erro = qx::dao::count<Entidades::Documento>(temp, construirWhereOrderByLimit(filters));
     if(erro.type() == QSqlError::NoError)
@@ -139,7 +144,7 @@ qx::QxSqlQuery DocumentoRepositorioQxOrm::construirWhereOrderByLimit(QMap<QStrin
         }
         else
         {
-            where.orderDesc("c_dodigo");
+            where.orderDesc("c_codigo");
         }
     }
     //Fim verificando filtros para a propriedade código

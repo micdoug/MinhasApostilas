@@ -1,3 +1,11 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: documento.h
+ * Descrição: Arquivo de declaração da classe Entidades::Documento.
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #ifndef ENTIDADES_DOCUMENTO_H
 #define ENTIDADES_DOCUMENTO_H
 
@@ -9,10 +17,10 @@
 #include "../Utils/ipropertygetset.h"
 
 //Anotações Orm4Qt
-#ifdef COMPILANDO
 #include "annotations.h"
+
+//Biblioteca QxOrm
 #include <QxOrm.h>
-#endif
 
 //Definições de pragmas do ODB Orm
 #include <odb/core.hxx>
@@ -21,9 +29,7 @@ namespace Entidades {
 
 class Documento: public Utils::INotifyPropertyChanged, public Utils::IPropertyGetSet
 {
-#ifdef COMPILANDO
    QX_REGISTER_FRIEND_CLASS(Entidades::Documento)
-#endif
     public:
         Documento();
         virtual ~Documento();
@@ -62,7 +68,6 @@ class Documento: public Utils::INotifyPropertyChanged, public Utils::IPropertyGe
         virtual void emitAllPropertiesChanged() override;
 
         //Orm4Qt annotations
-    #ifdef COMPILANDO
         ORM4QT_BEGIN
             CLASS(name="Documento", autocolumn="codigo", table="t_documento")
             PROPERTY(m_codigo, name="codigo", column="c_codigo", key=true)
@@ -72,7 +77,6 @@ class Documento: public Utils::INotifyPropertyChanged, public Utils::IPropertyGe
             PROPERTY(m_versao, name="versao", column="c_versao", required=true)
             PROPERTY(m_arquivo, name="arquivo", column="c_arquivo", required=true)
         ORM4QT_END
-    #endif
 
     };
 
@@ -110,9 +114,7 @@ class Documento: public Utils::INotifyPropertyChanged, public Utils::IPropertyGe
 
 } // namespace Entidades
 
-#ifdef COMPILANDO
 QX_REGISTER_PRIMARY_KEY(Entidades::Documento, qlonglong)
 QX_REGISTER_COMPLEX_CLASS_NAME_HPP_EXPORT_DLL(Entidades::Documento, qx::trait::no_base_class_defined, 0, Documento)
-#endif
 
 #endif // ENTIDADES_DOCUMENTO_H
