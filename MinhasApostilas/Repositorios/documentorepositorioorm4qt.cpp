@@ -1,7 +1,25 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: documentorepositorioorm4qt.cpp
+ * Descrição: Arquivo de implementação da classe Repositorios::DocumentoRepositorioOrm4Qt
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #include "documentorepositorioorm4qt.h"
+
+/*!
+ * \class Repositorios::DocumentoRepositorioOrm4Qt
+ * Implementação de um repositório de registros de objetos do tipo
+ * Entidades::Documento utilizando a biblioteca Orm4Qt.
+ */
 
 namespace Repositorios {
 
+/*!
+ *
+ * \param repository
+ */
 DocumentoRepositorioOrm4Qt::DocumentoRepositorioOrm4Qt(Orm4Qt::Repository *repository) :
     m_repository(repository)
 {}

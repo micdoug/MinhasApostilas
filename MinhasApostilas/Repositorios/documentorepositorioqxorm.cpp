@@ -1,9 +1,38 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: documentorepositorioqxorm.cpp
+ * Descrição: Arquivo de implementação da classe Repositorios::DocumentoRepositorioQxOrm
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
 #include "documentorepositorioqxorm.h"
 #include "QxDao/QxSqlDatabase.h"
 #include <QSqlError>
 
+/*!
+ * \class Repositorios::DocumentoRepositorioQxOrm
+ * Implementa um repositório para armazenamento de registros de objetos do tipo
+ * Entidades::Documento utilizando a biblioteca QxOrm. Este repositório utiliza
+ * conexão com o SGBD PostgreSql.
+ * \see Entidades::Documento
+ * \see Repositorios::IRepository
+ */
+
 namespace Repositorios {
 
+/*!
+ * Construtor do repositório. Ele recebe informações para acesso ao banco de dados PostgreSql.
+ * \param usuario
+ * Usuário de acesso ao banco de dados.
+ * \param senha
+ * Senha de acesso ao banco de dados.
+ * \param banco
+ * Nome do banco de dados a acessar.
+ * \param server
+ * Nome ou IP do servidor a acessar.
+ * \param port
+ * Número da porta de comunicação com o servidor.
+ */
 DocumentoRepositorioQxOrm::DocumentoRepositorioQxOrm(const QString &usuario, const QString &senha, const QString &banco, const QString &server, int port)
 {
     qx::QxSqlDatabase::getSingleton()->setDriverName("QPSQL");
@@ -14,6 +43,9 @@ DocumentoRepositorioQxOrm::DocumentoRepositorioQxOrm(const QString &usuario, con
     qx::QxSqlDatabase::getSingleton()->setPort(port);
 }
 
+/*!
+ * Destrutor.
+ */
 DocumentoRepositorioQxOrm::~DocumentoRepositorioQxOrm()
 {}
 
@@ -111,6 +143,13 @@ bool DocumentoRepositorioQxOrm::getObject(const QVariant &id, Entidades::Documen
     }
 }
 
+/*!
+ * Método utilizado para ajustar a mensagem de erro.
+ * \param prefixo
+ * Texto que deve vir antes da mensagem de descrição de erro do banco de dados.
+ * \param erro
+ * Objeto com a descrição do erro.
+ */
 void DocumentoRepositorioQxOrm::ajustarMensagemErro(const QString &prefixo, const QSqlError &erro)
 {
     setLastError(QString("Descrição: %1 \n"
@@ -119,6 +158,13 @@ void DocumentoRepositorioQxOrm::ajustarMensagemErro(const QString &prefixo, cons
                  .arg(erro.text()));
 }
 
+/*!
+ * Constrói a estrutura de filtro específica da biblioteca QxOrm utilizando os filtros informados.
+ * \param filters
+ * Lista de filtros a ser utilizada.
+ * \return
+ * Estrutura de filtro da biblioteca QxOrm que poderá ser utilizado durante uma operação de pesquisa.
+ */
 qx::QxSqlQuery DocumentoRepositorioQxOrm::construirWhereOrderByLimit(QMap<QString, QVariant> filters)
 {
     qx::QxSqlQuery where;

@@ -1,3 +1,10 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: documentorepositorioqxorm.h
+ * Descrição: Arquivo de declaração da classe Repositorios::DocumentoRepositorioQxOrm
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
 #ifndef REPOSITORIOS_DOCUMENTOREPOSITORIOQXORM_H
 #define REPOSITORIOS_DOCUMENTOREPOSITORIOQXORM_H
 

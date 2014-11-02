@@ -1,3 +1,11 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: editardocumento.h
+ * Descrição: Arquivo de implementação da classe Formularios::EditarDocumento.
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #ifndef FORMULARIOS_EDITARDOCUMENTO_H
 #define FORMULARIOS_EDITARDOCUMENTO_H
 

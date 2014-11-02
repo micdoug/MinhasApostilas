@@ -1,3 +1,11 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: documentorepositorioorm4qt.h
+ * Descrição: Arquivo de declaração da classe Repositorios::DocumentoRepositorioOrm4Qt
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #ifndef REPOSITORIOS_DOCUMENTOREPOSITORIOORM4QT_H
 #define REPOSITORIOS_DOCUMENTOREPOSITORIOORM4QT_H
 
