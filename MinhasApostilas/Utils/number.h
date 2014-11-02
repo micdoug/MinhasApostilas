@@ -1,3 +1,11 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: number.h
+ * Descrição: Arquivo de declaração da classe Utils::Number
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #ifndef UTILS_NUMBER_H
 #define UTILS_NUMBER_H
 
@@ -7,7 +15,7 @@ namespace Utils {
 
 class Number
 {
-public:
+private:
     Number();
 
     //Interface estática

@@ -1,3 +1,11 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: texteditwatcher.h
+ * Descrição: Arquivo de declaração da classe JanelaPrincipal
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #ifndef JANELAPRINCIPAL_H
 #define JANELAPRINCIPAL_H
 
@@ -13,7 +21,9 @@ namespace Ui {
 class JanelaPrincipal;
 }
 
+//Forward declarations
 class QProgressBar;
+
 
 class JanelaPrincipal : public QMainWindow
 {
@@ -32,6 +42,7 @@ public slots:
     void limparFiltros();
     void irParaPagina();
     void alterarQtdItensPagina();
+    void sobreEstePrograma();
 
 private slots:
     void aposAtualizar(bool sucesso);

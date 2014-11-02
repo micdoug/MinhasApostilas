@@ -115,6 +115,10 @@ class Documento: public Utils::INotifyPropertyChanged, public Utils::IPropertyGe
 } // namespace Entidades
 
 QX_REGISTER_PRIMARY_KEY(Entidades::Documento, qlonglong)
-QX_REGISTER_COMPLEX_CLASS_NAME_HPP_EXPORT_DLL(Entidades::Documento, qx::trait::no_base_class_defined, 0, Documento)
+#if  defined(Q_OS_WIN32)
+    QX_REGISTER_COMPLEX_CLASS_NAME_HPP_EXPORT_DLL(Entidades::Documento, qx::trait::no_base_class_defined, 0, Documento)
+#elif  defined(Q_OS_LINUX)
+    QX_REGISTER_COMPLEX_CLASS_NAME_HPP(Entidades::Documento, qx::trait::no_base_class_defined, 0, Documento)
+#endif
 
 #endif // ENTIDADES_DOCUMENTO_H

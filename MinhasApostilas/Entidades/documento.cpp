@@ -18,10 +18,11 @@
  * \struct Entidades::DocumentoInfo
  * Estrutura auxiliar utilizada para obter a quantidade de registros
  * atualmente no banco de dados utilizando a biblioteca ORM ODB.
+ * \see Entidades::Documento
  */
 
 /*!
- * \variable Entidades::DocumentoInfo::quantidade
+ * \property Entidades::DocumentoInfo::quantidade
  * Quantidade de registros de documentos retornada pelo banco de dados
  * após aplicar uma consulta com filtros.
  */
@@ -31,30 +32,31 @@
  * Estrutura auxiliar utilizada para exibir um conjunto de colunas
  * específico da tabela de documentos presente no banco de dados
  * utilizando a biblioteca ORM ODB.
+ * \see Entidades::Documento
  */
 
 /*!
- * \variable Entidades::DocumentoView::codigo
+ * \property Entidades::DocumentoView::codigo
  * Código de um documento.
 */
 
 /*!
- * \variable Entidades::DocumentoView::descricao
+ * \property Entidades::DocumentoView::descricao
  * Descrição de um documento.
 */
 
 /*!
- * \variable Entidades::DocumentoView::nome
+ * \property Entidades::DocumentoView::nome
  * Nome de um documento.
 */
 
 /*!
- * \variable Entidades::DocumentoView::ultimaAlteracao
+ * \property Entidades::DocumentoView::ultimaAlteracao
  * Data/hora da última alteração de um documento.
 */
 
 /*!
- * \ Entidades::DocumentoView::versao
+ * \property Entidades::DocumentoView::versao
  * Número da versão de um documento.
 */
 

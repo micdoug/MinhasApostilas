@@ -1,3 +1,11 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: texteditwatcher.h
+ * Descrição: Arquivo de declaração da classe Utils::TextEditWatcher
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #ifndef UTILS_TEXTEDITWATCHER_H
 #define UTILS_TEXTEDITWATCHER_H
 

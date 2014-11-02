@@ -75,7 +75,7 @@ namespace Repositorios {
          * \param list
          * A lista a ser preenchida com os registros encontrados.
          * \param filters
-         * Lista de filtros a serem utilizados. Para informar filtros você deve adicionar elementos com as
+         * Lista de filtros a serem utilizados. Para informar filtros você deve adicionar elementos
          * seguindo o padrão "nomePropriedade=" (valor da propriedade é exatamente igual ao valor informado),
          * "nomePropriedade>=" (valor da propriedade é maior ou igual), "nomePropriedade<=" (valor da propriedade
          * é menor ou igual), "nomePropriedadeContains" (valor de propriedade em string contém o trecho informado),
@@ -92,7 +92,7 @@ namespace Repositorios {
          * \param count
          * Variável a ser preenchida com o valor de contagem encontrado.
          * \param filters
-         * Lista de filtros a serem utilizados. Para informar filtros você deve adicionar elementos com as
+         * Lista de filtros a serem utilizados. Para informar filtros você deve adicionar elementos
          * seguindo o padrão "nomePropriedade=" (valor da propriedade é exatamente igual ao valor informado),
          * "nomePropriedade>=" (valor da propriedade é maior ou igual), "nomePropriedade<=" (valor da propriedade
          * é menor ou igual), "nomePropriedadeContains" (valor de propriedade em string contém o trecho informado),

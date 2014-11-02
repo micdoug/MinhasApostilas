@@ -1,3 +1,11 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: texteditwatcher.cpp
+ * Descrição: Arquivo de implementação da classe JanelaPrincipal
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #include "janelaprincipal.h"
 #include "ui_janelaprincipal.h"
 #include "Utils/number.h"
@@ -11,6 +19,24 @@
 #include <QPair>
 #include <QInputDialog>
 
+/*!
+ * \class JanelaPrincipal
+ * Janela principal do programa. Esta classe utiliza um repositório de objetos
+ * do tipo Entidades::Documento para executar as principais funções do programa.
+ * \see Repositorios::IRepository
+ * \see Entidades::Documento
+ * \see Repositorios::DocumentoRepositorioOrm4Qt
+ * \see Repositorios::DocumentoRepositorioQxOrm
+ * \see Repositorios::DocumentoRepositorioODB
+ */
+
+/*!
+ * Construtor.
+ * \param repositorio
+ * Instância de um repositório de objetos do tipo Entidades::Documento.
+ * \param parent
+ * Objeto responsável pela gerência de alocação desta instância.
+ */
 JanelaPrincipal::JanelaPrincipal(Repositorios::IRepository<Entidades::Documento> *repositorio, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::JanelaPrincipal),
@@ -48,6 +74,7 @@ JanelaPrincipal::JanelaPrincipal(Repositorios::IRepository<Entidades::Documento>
     connect(ui->actionItensPorPagina, &QAction::triggered, this, &JanelaPrincipal::alterarQtdItensPagina);
     connect(ui->actionLimparFiltros, &QAction::triggered, this, &JanelaPrincipal::limparFiltros);
     connect(ui->actionSobreQt, &QAction::triggered, qApp, &QApplication::aboutQt);
+    connect(ui->actionSobreEstePrograma, &QAction::triggered, this, &JanelaPrincipal::sobreEstePrograma);
     //Fim conectando ações dos componentes da interface
 
     //Connectando sinais das tarefas assíncronas
@@ -67,12 +94,18 @@ JanelaPrincipal::JanelaPrincipal(Repositorios::IRepository<Entidades::Documento>
     //Fim preenchendo lista de nomes de colunas
 }
 
+/*!
+ * Destrutor
+ */
 JanelaPrincipal::~JanelaPrincipal()
 {
     delete ui;
     delete m_repositorio;
 }
 
+/*!
+ * Efetua a pesquisa no banco de dados e atualiza os registros exibidos na tela do programa.
+ */
 void JanelaPrincipal::atualizar()
 {
     //Verificando se não existem operações pendentes
@@ -103,6 +136,11 @@ void JanelaPrincipal::atualizar()
     watcher->setFuture(future);
 }
 
+/*!
+ * Ajusta os componentes após a atualização dos registros pesquisados.
+ * \param sucesso
+ * Informa se a pesquisa ocorreu com sucesso ou não (ocorreu algum erro).
+ */
 void JanelaPrincipal::aposAtualizar(bool sucesso)
 {
     //Se a operação foi bem sucedida atualiza lista do model
@@ -127,6 +165,11 @@ void JanelaPrincipal::aposAtualizar(bool sucesso)
     setOcupado(false);
 }
 
+/*!
+ * Ajusta os componentes após um documento ter sido adicionado.
+ * \param sucesso
+ * Informa se a adição ocorreu com sucesso ou não (ocorreu algum erro).
+ */
 void JanelaPrincipal::aposDocumentoAdicionado(bool sucesso)
 {
     setOcupado(false);
@@ -140,6 +183,11 @@ void JanelaPrincipal::aposDocumentoAdicionado(bool sucesso)
     }
 }
 
+/*!
+ * Ajusta os componentes após um documento ter sido editado.
+ * \param sucesso
+ * Informa se a edição ocorreu com sucesso ou não (ocorreu algum erro).
+ */
 void JanelaPrincipal::aposDocumentoEditado(bool sucesso)
 {
     setOcupado(false);
@@ -153,11 +201,20 @@ void JanelaPrincipal::aposDocumentoEditado(bool sucesso)
     }
 }
 
+/*!
+ * Ajusta os componentes após um documento ter sido excluído.
+ * \param sucesso
+ * Informa se a exclusão ocorreu com sucesso ou não (ocorreu algum erro).
+ */
 void JanelaPrincipal::aposDocumentoExcluido(bool sucesso)
 {
     setOcupado(false);
     if(sucesso)
     {
+        if(m_model.documentos().size() == 1)
+        {
+            m_paginaAtual = 1;
+        }
         atualizar();
     }
     else
@@ -166,6 +223,9 @@ void JanelaPrincipal::aposDocumentoExcluido(bool sucesso)
     }
 }
 
+/*!
+ * Ajusta os componentes da tela de acordo com a situação atual.
+ */
 void JanelaPrincipal::ajustarActions()
 {
     //Validando se há algum item selecionado na tabela
@@ -206,6 +266,9 @@ void JanelaPrincipal::ajustarActions()
 
 }
 
+/*!
+ * Ajusta o texto do paginador.
+ */
 void JanelaPrincipal::ajustarLabelPaginas()
 {
     ui->labelPaginas->setText(QString("Página %1 de %2")
@@ -213,6 +276,9 @@ void JanelaPrincipal::ajustarLabelPaginas()
                               .arg(m_qtdPaginas));
 }
 
+/*!
+ * Adiciona um novo documento no banco de dados.
+ */
 void JanelaPrincipal::adicionarDocumento()
 {
     //Verificando se não existem operações pendentes
@@ -238,6 +304,9 @@ void JanelaPrincipal::adicionarDocumento()
     }
 }
 
+/*!
+ * Edita um documento previamente cadastrado.
+ */
 void JanelaPrincipal::editarDocumento()
 {
     //Verificando se não existem operações pendentes
@@ -303,6 +372,9 @@ void JanelaPrincipal::editarDocumento()
     setOcupado(true);
 }
 
+/*!
+ * Exclui um documento previamente cadastrado.
+ */
 void JanelaPrincipal::excluirDocumento()
 {
     //Verificando se não existem operações pendentes
@@ -372,6 +444,9 @@ void JanelaPrincipal::excluirDocumento()
     }
 }
 
+/*!
+ * Abre o formulário de edição dos filtros de busca.
+ */
 void JanelaPrincipal::filtrar()
 {
     //Verificando se há operações pendentes
@@ -382,10 +457,17 @@ void JanelaPrincipal::filtrar()
     Formularios::EditarFiltros formulario(&m_filtros, this);
     if (formulario.exec() == QDialog::Accepted)
     {
+        if(m_model.documentos().size() == 1)
+        {
+            m_paginaAtual = 1;
+        }
         atualizar();
     }
 }
 
+/*!
+ * Remove todos os filtros em uso
+ */
 void JanelaPrincipal::limparFiltros()
 {
     //Verificando se há tarefas pendentes
@@ -411,6 +493,9 @@ void JanelaPrincipal::limparFiltros()
     atualizar();
 }
 
+/*!
+ * Navega para determinada página.
+ */
 void JanelaPrincipal::irParaPagina()
 {
     //Verificando se há operações pendentes
@@ -427,6 +512,9 @@ void JanelaPrincipal::irParaPagina()
     }
 }
 
+/*!
+ * Altera a quantidade de itens exibidos por página.
+ */
 void JanelaPrincipal::alterarQtdItensPagina()
 {
     //Verificando se há operações pendentes
@@ -443,30 +531,59 @@ void JanelaPrincipal::alterarQtdItensPagina()
     }
 }
 
+/*!
+ * Exibe uma janela com informações sobre este programa.
+ */
+void JanelaPrincipal::sobreEstePrograma()
+{
+    QMessageBox::about(this, "Minhas Apostilas", "Programa desenvolvido com o objetivo de comparar bibliotecas ORM para a linguagem C++. \n"
+                                                 "Desenvolvido por: Michael Dougras da Silva \n"
+                                                 "Contato: micdoug.silva@gmail.com");
+}
+
+/*!
+ * Navega para a página anterior.
+ */
 void JanelaPrincipal::irParaPaginaAnterior()
 {
     --m_paginaAtual;
     atualizar();
 }
 
+/*!
+ * Navega para a próxima página
+ */
 void JanelaPrincipal::irParaProximaPagina()
 {
     ++m_paginaAtual;
     atualizar();
 }
 
+/*!
+ * Navega para a primeira página.
+ */
 void JanelaPrincipal::irParaPrimeiraPagina()
 {
     m_paginaAtual = 1;
     atualizar();
 }
 
+/*!
+ * Navega para a última página.
+ */
 void JanelaPrincipal::irParaUltimaPagina()
 {
     m_paginaAtual = m_qtdPaginas;
     atualizar();
 }
 
+/*!
+ * Método chamado quando o usuário clica em uma coluna solicitando a ordenação de elementos.
+ * \param indice
+ * Número da coluna a ser ordenada.
+ * \param ordem
+ * Informa se a ordenação é crescente ou decrescente.
+ */
 void JanelaPrincipal::ajustarOrdernacao(int indice, Qt::SortOrder ordem)
 {
     //Limpa os filtros de ordenação
@@ -482,6 +599,12 @@ void JanelaPrincipal::ajustarOrdernacao(int indice, Qt::SortOrder ordem)
     atualizar();
 }
 
+/*!
+ * Ajusta o status da janela em ocupado ou livre. Usado para controlar a espera pelo término de tarefas
+ * assíncronas.
+ * \param ocupado
+ * Se true a janela fica em modo ocupado, se false a janela fica em modo normal.
+ */
 void JanelaPrincipal::setOcupado(bool ocupado)
 {
     //Se setar como ocupado
@@ -502,11 +625,22 @@ void JanelaPrincipal::setOcupado(bool ocupado)
     }
 }
 
+/*!
+ * Informa se a janela está em modo ocupado ou não,
+ * ou seja, se há alguma tarefa assíncrona em execução.
+ * \return
+ * Se a janela está em modo ocupado.
+ */
 bool JanelaPrincipal::isOcupado() const
 {
     return m_barraProgresso->isVisible();
 }
 
+/*!
+ * Exibe mensagens de espera por tarefas pendentes.
+ * \return
+ * Se a jenela está em modo ocupado ou não.
+ */
 bool JanelaPrincipal::aguardarOperacoesPendentes()
 {
     if(isOcupado())

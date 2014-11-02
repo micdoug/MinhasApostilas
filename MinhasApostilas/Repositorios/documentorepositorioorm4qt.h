@@ -20,7 +20,9 @@ namespace Repositorios {
 class DocumentoRepositorioOrm4Qt : public IRepository<Entidades::Documento>
 {
 public:
-    DocumentoRepositorioOrm4Qt(Orm4Qt::Repository *repository);
+    DocumentoRepositorioOrm4Qt(const QString &usuario, const QString senha,
+                               const QString &database, const QString &servidor = "localhost",
+                               int port = 5432);
     virtual ~DocumentoRepositorioOrm4Qt();
 
     //IRepository<Entidades::Documento> interface

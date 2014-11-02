@@ -1,3 +1,11 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: documentorepositorioodb.h
+ * Descrição: Arquivo de declaração da classe Repositorios::DocumentoRepositorioODB
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #ifndef REPOSITORIOS_DOCUMENTOREPOSITORIOODB_H
 #define REPOSITORIOS_DOCUMENTOREPOSITORIOODB_H
 

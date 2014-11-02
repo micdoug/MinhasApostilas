@@ -80,11 +80,6 @@ INCLUDEPATH += ../QxOrm/include \
 
 # Define que a biblioteca QxOrm deve ser compilada antes deste projeto
 DEPENDPATH += $$PWD/../QxOrm
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../QxOrm/release/libQxOrm.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../QxOrm/debug/libQxOrm.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../QxOrm/release/QxOrm.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../QxOrm/debug/QxOrm.lib
-else:unix: PRE_TARGETDEPS += $$OUT_PWD/../QxOrm/libQxOrm.a
 
 # Adicionando diretivas do linker para adicionar biblioteca QxOrm
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../QxOrm/release -lQxOrm

@@ -1,3 +1,11 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: inotifypropertychanged.h
+ * Descrição: Arquivo de declaração da classe abstrata Utils::INotifyPropertyChanged
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #ifndef UTILS_INOTIFYPROPERTYCHANGED_H
 #define UTILS_INOTIFYPROPERTYCHANGED_H
 

@@ -1,40 +1,53 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: ipropertygetset.cpp
+ * Descrição: Arquivo de implementação parcial da classe abstrata Utils::IPropertyGetSet
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #include "ipropertygetset.h"
 
 /*!
- * Utils::IPropertyGetSet
- * Interface to set and get property values based
- * on property names.
+ * \class Utils::IPropertyGetSet
+ * Interface que permite atribuir e consultar valores de
+ * propriedades a partir de seus nomes.
  */
 
 namespace Utils {
 
 /*!
- * Default constructor
+ * Construtor padrão.
  */
 IPropertyGetSet::IPropertyGetSet()
 {}
 
 /*!
- * Default virtual destructor
+ * Destrutor.
  */
 IPropertyGetSet::~IPropertyGetSet()
 {}
 
 /*!
  * \fn Utils::IPropertyGetSet::getPropertyValue
- * Get the current value of a property
+ * Método de consulta ao valor atual de uma propriedade.
  * \param propertyName
- * The name of the property
+ * O nome da propriedade a ser consultada.
+ * \return
+ * O valor atual da propriedade consultada. Retorna um QVariant inválido no caso de um nome
+ * inválido de propriedade ter sido informado. Este método deve ser implementado pelas classes
+ * que utilizam esta interface.
  */
 
 /*!
  * \fn Utils::IPropertyGetSet::setPropertyValue
- * Set the current value of a property
+ * Método de ajuste do valor de propriedades.
  * \param propertyName
- * The name of the property
+ * Nome da propriedade a ser ajustada.
  * \param newValue
- * The new value of the property
- * \return If the value supplied could be setted in the property
+ * Novo valor para a propriedade
+ * \return
+ * Se o valor foi ou não ajustado com sucesso.
  */
 
 } // namespace Utils

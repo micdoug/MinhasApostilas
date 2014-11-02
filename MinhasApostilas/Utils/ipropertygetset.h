@@ -1,3 +1,11 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: ipropertygetset.h
+ * Descrição: Arquivo de declaração da classe abstrata Utils::IPropertyGetSet
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #ifndef UTILS_IPROPERTYGETSET_H
 #define UTILS_IPROPERTYGETSET_H
 

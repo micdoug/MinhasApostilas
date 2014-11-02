@@ -7,23 +7,38 @@
  * ----------------------------------------------------------------------*/
 
 #include "documentorepositorioorm4qt.h"
+#include "postgresqlprovider.h"
 
 /*!
  * \class Repositorios::DocumentoRepositorioOrm4Qt
  * Implementação de um repositório de registros de objetos do tipo
- * Entidades::Documento utilizando a biblioteca Orm4Qt.
+ * Entidades::Documento utilizando a biblioteca Orm4Qt. Este repositório
+ * utiliza uma conexão como SGBD PostgreSql.
  */
 
 namespace Repositorios {
 
 /*!
- *
- * \param repository
+ * Construtor.
+ * \param usuario
+ * Usuário de acesso ao banco de dados.
+ * \param senha
+ * Senha de acesso ao banco de dados.
+ * \param database
+ * Nome do banco de dados para acessar.
+ * \param servidor
+ * Nome ou IP do servidor de banco de dados.
+ * \param port
+ * Número da porta de acesso ao banco de dados.
  */
-DocumentoRepositorioOrm4Qt::DocumentoRepositorioOrm4Qt(Orm4Qt::Repository *repository) :
-    m_repository(repository)
-{}
+DocumentoRepositorioOrm4Qt::DocumentoRepositorioOrm4Qt(const QString &usuario, const QString senha, const QString &database, const QString &servidor, int port)
+{
+    m_repository = new Orm4Qt::Repository(new Orm4Qt::PostgreSqlProvider(usuario, senha, database, servidor, port));
+}
 
+/*!
+ * Destrutor.
+ */
 DocumentoRepositorioOrm4Qt::~DocumentoRepositorioOrm4Qt()
 {
     delete m_repository;

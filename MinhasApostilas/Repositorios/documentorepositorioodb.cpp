@@ -1,3 +1,11 @@
+/* ----------------------------------------------------------------------
+ * Arquivo: documentorepositorioodb.h
+ * Descrição: Arquivo de implementação da classe Repositorios::DocumentoRepositorioODB
+ *
+ * Autor: Michael Dougras da Silva
+ * Contato: micdoug.silva@gmail.com
+ * ----------------------------------------------------------------------*/
+
 #include "documentorepositorioodb.h"
 #include <odb/pgsql/database.hxx>
 #include <odb/core.hxx>
@@ -11,14 +19,36 @@ typedef std::unique_ptr<Entidades::Documento> DocumentoPtr;
 
 using namespace odb::core;
 
+/*!
+ * \class Repositorios::DocumentoRepositorioODB
+ * Implementação de um repositório de registros do tipo Entidades::Documento
+ * utilizando a biblioteca ODB. Este repositório utiliza uma conexão com
+ * o SGDB PostgreSql.
+ */
+
 namespace Repositorios {
 
+/*!
+ * Construtor.
+ * \param usuario
+ * Usuário de acesso ao banco de dados.
+ * \param senha
+ * Senha de acesso ao banco de dados.
+ * \param banco
+ * Nome do banco de dados para acessar.
+ * \param server
+ * Nome ou IP do servidor de banco de dados.
+ * \param port
+ * Número da porta de comunicação com o servidor de banco de dados.
+ */
 DocumentoRepositorioODB::DocumentoRepositorioODB(std::string usuario, std::string senha, std::string banco, std::string server, int port)
 {
     m_database = new odb::pgsql::database(usuario, senha, banco, server, port);
-    //m_database = new odb::pgsql::database("postgres", "postgres", "MinhasApostilas");
 }
 
+/*!
+ * Destrutor.
+ */
 DocumentoRepositorioODB::~DocumentoRepositorioODB()
 {
     delete m_database;
@@ -227,6 +257,13 @@ bool DocumentoRepositorioODB::getObject(const QVariant &id, Entidades::Documento
     }
 }
 
+/*!
+ * Método auxiliar que constrói a cláusula where.
+ * \param filters
+ * Filtros utilizados para a seleção de registros do banco de dados.
+ * \return
+ * Objeto descritor de cláusula where.
+ */
 odb::query<Entidades::Documento> *DocumentoRepositorioODB::construirWhere(QMap<QString, QVariant> filters)
 {
     QList<Where> whereList;
@@ -331,6 +368,13 @@ odb::query<Entidades::Documento> *DocumentoRepositorioODB::construirWhere(QMap<Q
     }
 }
 
+/*!
+ * Método auxiliar que constrói a cláusula de ordenação de registros.
+ * \param filters
+ * Lista de filtros utilizados para seleção de registros.
+ * \return
+ * Objeto descritor da cláusula de ordenação.
+ */
 odb::query<Entidades::Documento> *DocumentoRepositorioODB::construirOrderBy(QMap<QString, QVariant> filters)
 {
     QList<Where> orderbyList;
@@ -383,6 +427,13 @@ odb::query<Entidades::Documento> *DocumentoRepositorioODB::construirOrderBy(QMap
 
 }
 
+/*!
+ * Método auxiliar que constrói a cláusula de paginação.
+ * \param filters
+ * Lista de filtros utilizados para seleção de registros do banco de dados.
+ * \return
+ * Objeto descritor da cláusula de paginação.
+ */
 odb::query<Entidades::Documento> *DocumentoRepositorioODB::construirLimitOffset(QMap<QString, QVariant> filters)
 {
     //Adicionando limit e offset
