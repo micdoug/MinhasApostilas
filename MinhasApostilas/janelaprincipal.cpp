@@ -527,6 +527,10 @@ void JanelaPrincipal::alterarQtdItensPagina()
     if(escolheu)
     {
         m_itensPorPagina = qtd;
+        if(m_model.documentos().size() == 1)
+        {
+            m_paginaAtual = 1;
+        }
         atualizar();
     }
 }
